@@ -602,8 +602,7 @@
         </div>
         <div class="controls-row">
   <select id="visualModeSelect" class="station-select">
-    <option value="dj">🎚 DJ Bars</option>
-    <option value="led">💡 Classic LEDs</option>
+    <option value="dj">🎚 DJ Bars</option><option     value="rainbow">🌈 Rainbow Slice</option>
     <option value="waves">🌊 Waves</option>
     <option value="aurora">🌌 Aurora</option>
   </select>
@@ -1231,21 +1230,21 @@ if (radioShell && skinSelect) {
         });
         break;
 
-      // 💡 Classic LEDs – 1/8e d’octave, barres plus serrées
-      case "led":
-        audioMotion.setOptions({
-          mode: 3,             // 1/8e d’octave
-          gradient: "classic",
-          ledBars: true,
-          mirror: 1,
-          barSpace: 0.5,       // plus d’espace entre les barres
-          radial: false,
-          lineWidth: 0,
-          fillAlpha: 0
-        });
-        break;
-
-      // 🌊 Waves – courbe fluide
+     // 🌈 Rainbow Slice – barres multicolores type dancefloor
+       case "rainbow":
+      audioMotion.setOptions({
+      mode: 6,              // barres classiques
+     gradient: "rainbow",  // dégradé multicolore
+    ledBars: false,       // lisse, sans effet LED
+    mirror: 1,            // miroir vertical
+    barSpace: 0.25,       // un peu d’espace entre les barres
+    smoothing: 0.6,
+    radial: false,
+    lineWidth: 0,
+    fillAlpha: 0
+  });
+  break;
+  // 🌊 Waves – courbe fluide
       case "waves":
         audioMotion.setOptions({
           mode: 10,            // line / area graph
