@@ -10,15 +10,14 @@
     }
 
     body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ;
-  color: #fff;
-  background: linear-gradient(to bottom, rgb(93, 188, 218) 0%, rgb(72, 140, 169) 100%);
-}
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #333 0, #050505 55%);
+      color: #fff;
+    }
 
     .radio-wrapper {
       width: 900px;
@@ -178,11 +177,7 @@
 
 
     
- #visualizerCanvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
+ 
 
 .station-logo {
   position: absolute;
@@ -195,15 +190,17 @@
   z-index: 2;
 }
    /* Canvas visualizer derrière le logo */
-    #visualizerCanvas {
-      position: absolute;
-      inset: 10px;
-      width: calc(100% - 20px);
-      height: calc(100% - 20px);
-      z-index: 0;
-      opacity: 0.8;
-      pointer-events: none;
-    }
+   /* Conteneur du visualizer AudioMotion derrière le logo */
+#visualizer {
+  position: absolute;
+  inset: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
 
     .station-logo {
       position: absolute;
@@ -448,7 +445,7 @@
     <div class="radio-center">
       <div class="center-left">
         <!-- Visualizer derrière le logo -->
-        <canvas id="visualizerCanvas"></canvas>
+        <div id="visualizer"></div>
         <div class="glass-screen"></div>
         <div class="station-logo" id="stationLogo"></div>
 
@@ -681,38 +678,86 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  function drawVisualizer() {
-    if (!analyser || !ctx || !canvas) return;
+ function drawVisualizer() {
+  if (!analyser || !ctx || !canvas) return;
 
-    resizeCanvas();
-    analyser.getByteFrequencyData(dataArray);
+  resizeCanvas();
+  analyser.getByteFrequencyData(dataArray);
 
-    const width = canvas.width / (window.devicePixelRatio || 1);
-    const height = canvas.height / (window.devicePixelRatio || 1);
+  const dpr = window.devicePixelRatio || 1;
+  const width  = canvas.width  / dpr;
+  const height = canvas.height / dpr;
 
-    ctx.clearRect(0, 0, width, height);
+  // Légère persistance (effet LED / afterglow)
+  ctx.save();
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.fillRect(0, 0, width, height);
+  ctx.restore();
 
-    const barCount = 40;
-    const step = Math.floor(dataArray.length / barCount);
-    const barWidth = width / barCount;
+  const barCount  = 80;        // ← 80 bandes
+  const barSpace  = 0.5;       // ← 50% espace, 50% barre
+  const step      = Math.max(1, Math.floor(dataArray.length / barCount));
 
-    for (let i = 0; i < barCount; i++) {
-      const value = dataArray[i * step] || 0;
-      const barHeight = (value / 255) * height * 0.8;
-      const x = i * barWidth;
-      const y = height - barHeight;
+  const fullBarMaxHeight = height * 0.38; // hauteur max pour chaque demi-barre
+  const centerY          = height * 0.5;
 
-      const grad = ctx.createLinearGradient(x, y, x, height);
-      grad.addColorStop(0, "#ffeb3b");
-      grad.addColorStop(0.4, "#ff9800");
-      grad.addColorStop(1, "#ff5722");
+  const bandWidth = width / barCount;
 
-      ctx.fillStyle = grad;
-      ctx.fillRect(x + barWidth * 0.15, y, barWidth * 0.17, barHeight);
+  ctx.save();
+  ctx.shadowBlur  = 14;
+  ctx.shadowColor = "rgba(0, 255, 150, 0.9)";
+
+  const segmentCount = 16;    // nombre de “LEDs” par demi-barre
+  const segmentGap   = 2;
+  const segmentHeight = (fullBarMaxHeight - (segmentCount - 1) * segmentGap) / segmentCount;
+
+  for (let i = 0; i < barCount; i++) {
+    const value = dataArray[i * step] || 0;
+    const level = value / 255;
+
+    const filledSegments = Math.floor(level * segmentCount);
+
+    const totalSpace = bandWidth * barSpace;
+    const barWidth   = bandWidth - totalSpace;
+    const x          = i * bandWidth + totalSpace / 2;
+
+    // Gradient pour la partie haute (du vert clair au vert profond)
+    const gradTop = ctx.createLinearGradient(x, centerY - fullBarMaxHeight, x, centerY);
+    gradTop.addColorStop(0, "rgba(180, 255, 220, 1)");
+    gradTop.addColorStop(0.5, "rgba(0, 255, 150, 1)");
+    gradTop.addColorStop(1, "rgba(0, 90, 40, 1)");
+
+    const gradBottom = ctx.createLinearGradient(x, centerY, x, centerY + fullBarMaxHeight);
+    gradBottom.addColorStop(0, "rgba(0, 70, 30, 1)");
+    gradBottom.addColorStop(0.5, "rgba(0, 255, 120, 1)");
+    gradBottom.addColorStop(1, "rgba(180, 255, 220, 1)");
+
+    // Segments allumés (classic LEDs) – top + miroir bottom
+    for (let s = 0; s < filledSegments; s++) {
+      const yTop = centerY - (s + 1) * (segmentHeight + segmentGap);
+      const yBottom = centerY + s * (segmentHeight + segmentGap) + segmentGap;
+
+      // intensité progressive (les segments plus haut sont un peu plus lumineux)
+      const alpha = 0.4 + 0.6 * (s / segmentCount);
+
+      // TOP
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = gradTop;
+      ctx.fillRect(x, yTop, barWidth, segmentHeight);
+
+      // BOTTOM (miroir)
+      ctx.globalAlpha = alpha * 0.8;
+      ctx.fillStyle = gradBottom;
+      ctx.fillRect(x, yBottom, barWidth, segmentHeight);
     }
-
-    animationId = requestAnimationFrame(drawVisualizer);
   }
+
+  ctx.restore();
+
+  animationId = requestAnimationFrame(drawVisualizer);
+}
+
 
   function startVisualizer() {
     if (!canvas || !ctx) return;
@@ -837,6 +882,34 @@
 
   // Init
   refreshStationOptions();
+</script>
+
+  <script type="module">
+  import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
+
+  // Ton élément audio existant
+  const audio = document.getElementById('audioPlayer');
+
+  // Instanciation du visualizer
+  const audioMotion = new AudioMotionAnalyzer(
+    document.getElementById('visualizer'),
+    {
+      source: audio,          // on utilise directement ton <audio>
+      height: 0,              // s’adapte à la hauteur du conteneur
+      width: 0,               // s’adapte à la largeur du conteneur
+      ansiBands: false,
+      showScaleX: false,
+      bgAlpha: 0,
+      overlay: true,
+      mode: 6,                // mode barres
+      frequencyScale: "log",
+      smoothing: 0.7,
+      gradient: "classic",    // dégradé "classic" comme ton exemple
+      ledBars: true,          // LED style
+      mirror: 1,              // miroir horizontal
+      showPeaks: true
+    }
+  );
 </script>
 </body>
 </html>
