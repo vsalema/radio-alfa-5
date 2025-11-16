@@ -600,6 +600,15 @@
           <button id="playPauseBtn" class="btn-primary">▶️ Lecture</button>
           <button id="stopBtn">⏹ Stop</button>
         </div>
+        <div class="controls-row">
+  <select id="visualModeSelect" class="station-select">
+    <option value="dj">🎚 DJ Bars</option>
+    <option value="led">💡 Classic LEDs</option>
+    <option value="waves">🌊 Waves</option>
+    <option value="aurora">🌌 Aurora</option>
+  </select>
+</div>
+
         <div class="volume-row">
           <span>Volume</span>
           <input type="range" min="0" max="1" step="0.01" id="volumeSlider" />
@@ -664,6 +673,7 @@
       logo: "https://upload.wikimedia.org/wikipedia/commons/0/02/M80_Portugal.svg"
     }
   ];
+  const visualModeSelect = document.getElementById("visualModeSelect");
   const freqNeedle = document.getElementById("freqNeedle");
   const audio = document.getElementById("audioPlayer");
   const stationSelect = document.getElementById("stationSelect");
@@ -685,6 +695,10 @@ const skinSelect = document.getElementById("skinSelect");
 
   let currentIndex = -1;
   let isPlaying = false;
+
+  let timeArray = null;
+  let visualMode = "dj"; // mode par défaut
+
 
   audio.volume = 0.7;
   volumeSlider.value = audio.volume;
@@ -743,6 +757,7 @@ const skinSelect = document.getElementById("skinSelect");
     stationName.textContent = "Aucune station configurée";
     stationMeta.textContent = "Ajoute une station en bas du poste.";
     freqMain.textContent = "00.0";
+    updateNeedle(88);
     const logoEl = document.getElementById("stationLogo");
     logoEl.style.backgroundImage = "none";
     logoEl.style.opacity = "0";
@@ -762,9 +777,10 @@ const skinSelect = document.getElementById("skinSelect");
     const st = stations[currentIndex];
     stationName.textContent = st.name;
     stationMeta.textContent =
-      `${st.freq.toFixed(1)} MHz · ${st.city} · ${st.desc || ""}`;
-    freqMain.textContent = "00.0";
-    updateNeedle(88); // aiguille au début de la bande
+  `${st.freq.toFixed(1)} MHz · ${st.city} · ${st.desc || ""}`;
+freqMain.textContent = st.freq.toFixed(1);
+updateNeedle(st.freq);
+ // aiguille au début de la bande
 
 
     const logoEl = document.getElementById("stationLogo");
@@ -821,6 +837,7 @@ const skinSelect = document.getElementById("skinSelect");
         analyser.fftSize = 256;
         const bufferLength = analyser.frequencyBinCount;
         dataArray = new Uint8Array(bufferLength);
+timeArray = new Uint8Array(analyser.fftSize);       
         sourceNode.connect(analyser);
         analyser.connect(audioCtx.destination);
       }
@@ -842,85 +859,193 @@ const skinSelect = document.getElementById("skinSelect");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
- function drawVisualizer() {
+function drawVisualizer() {
   if (!analyser || !ctx || !canvas) return;
 
   resizeCanvas();
-  analyser.getByteFrequencyData(dataArray);
 
   const dpr = window.devicePixelRatio || 1;
   const width  = canvas.width  / dpr;
   const height = canvas.height / dpr;
 
-  // Légère persistance (effet LED / afterglow)
+  // Légère persistance de fond
   ctx.save();
-  ctx.globalAlpha = 0.3;
+  ctx.globalAlpha = 0.28;
   ctx.fillStyle = "rgba(0, 0, 0, 1)";
   ctx.fillRect(0, 0, width, height);
   ctx.restore();
 
-  const barCount  = 80;        // ← 80 bandes
-  const barSpace  = 0.5;       // ← 50% espace, 50% barre
-  const step      = Math.max(1, Math.floor(dataArray.length / barCount));
+  // ----- MODE DJ BARS (ton visuel actuel) -----
+  if (visualMode === "dj") {
+    analyser.getByteFrequencyData(dataArray);
 
-  const fullBarMaxHeight = height * 0.38; // hauteur max pour chaque demi-barre
-  const centerY          = height * 0.5;
+    const barCount = 48;
+    const step = Math.floor(dataArray.length / barCount);
+    const barWidth = width / barCount;
+    const centerY = height * 0.55;
 
-  const bandWidth = width / barCount;
+    ctx.save();
+    ctx.shadowBlur = 16;
+    ctx.shadowColor = "#00e5ff";
 
-  ctx.save();
-  ctx.shadowBlur  = 14;
-  ctx.shadowColor = "rgba(0, 255, 150, 0.9)";
+    for (let i = 0; i < barCount; i++) {
+      const value = dataArray[i * step] || 0;
+      const amp = value / 255;
 
-  const segmentCount = 16;    // nombre de “LEDs” par demi-barre
-  const segmentGap   = 2;
-  const segmentHeight = (fullBarMaxHeight - (segmentCount - 1) * segmentGap) / segmentCount;
+      const barHeight = amp * height * 0.45;
+      const x = i * barWidth + barWidth * 0.2;
 
-  for (let i = 0; i < barCount; i++) {
-    const value = dataArray[i * step] || 0;
-    const level = value / 255;
+      const hue = (i * 9 + value / 2) % 360;
+      ctx.fillStyle = `hsl(${hue}, 100%, 55%)`;
 
-    const filledSegments = Math.floor(level * segmentCount);
+      const topY = centerY - barHeight;
+      ctx.fillRect(x, topY, barWidth * 0.6, barHeight);
 
-    const totalSpace = bandWidth * barSpace;
-    const barWidth   = bandWidth - totalSpace;
-    const x          = i * bandWidth + totalSpace / 2;
-
-    // Gradient pour la partie haute (du vert clair au vert profond)
-    const gradTop = ctx.createLinearGradient(x, centerY - fullBarMaxHeight, x, centerY);
-    gradTop.addColorStop(0, "rgba(180, 255, 220, 1)");
-    gradTop.addColorStop(0.5, "rgba(0, 255, 150, 1)");
-    gradTop.addColorStop(1, "rgba(0, 90, 40, 1)");
-
-    const gradBottom = ctx.createLinearGradient(x, centerY, x, centerY + fullBarMaxHeight);
-    gradBottom.addColorStop(0, "rgba(0, 70, 30, 1)");
-    gradBottom.addColorStop(0.5, "rgba(0, 255, 120, 1)");
-    gradBottom.addColorStop(1, "rgba(180, 255, 220, 1)");
-
-    // Segments allumés (classic LEDs) – top + miroir bottom
-    for (let s = 0; s < filledSegments; s++) {
-      const yTop = centerY - (s + 1) * (segmentHeight + segmentGap);
-      const yBottom = centerY + s * (segmentHeight + segmentGap) + segmentGap;
-
-      // intensité progressive (les segments plus haut sont un peu plus lumineux)
-      const alpha = 0.4 + 0.6 * (s / segmentCount);
-
-      // TOP
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = gradTop;
-      ctx.fillRect(x, yTop, barWidth, segmentHeight);
-
-      // BOTTOM (miroir)
-      ctx.globalAlpha = alpha * 0.8;
-      ctx.fillStyle = gradBottom;
-      ctx.fillRect(x, yBottom, barWidth, segmentHeight);
+      const bottomHeight = barHeight * 0.6;
+      ctx.fillRect(x, centerY, barWidth * 0.6, bottomHeight);
     }
+
+    ctx.restore();
+
+    // Laser horizontal
+    ctx.save();
+    ctx.strokeStyle = "rgba(0, 255, 255, 0.55)";
+    ctx.lineWidth = 2;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "rgba(0, 255, 255, 0.9)";
+    ctx.beginPath();
+    ctx.moveTo(0, height * 0.55);
+    ctx.lineTo(width, height * 0.55);
+    ctx.stroke();
+    ctx.restore();
   }
 
-  ctx.restore();
+  // ----- MODE CLASSIC LED (80 bandes, blocs LED) -----
+  else if (visualMode === "led") {
+    analyser.getByteFrequencyData(dataArray);
+
+    const barCount  = 80;
+    const barSpace  = 0.5;
+    const step      = Math.max(1, Math.floor(dataArray.length / barCount));
+
+    const fullBarMaxHeight = height * 0.38;
+    const centerY          = height * 0.5;
+
+    const bandWidth = width / barCount;
+
+    ctx.save();
+    ctx.shadowBlur  = 14;
+    ctx.shadowColor = "rgba(0, 255, 150, 0.9)";
+
+    const segmentCount  = 16;
+    const segmentGap    = 2;
+    const segmentHeight = (fullBarMaxHeight - (segmentCount - 1) * segmentGap) / segmentCount;
+
+    for (let i = 0; i < barCount; i++) {
+      const value = dataArray[i * step] || 0;
+      const level = value / 255;
+      const filledSegments = Math.floor(level * segmentCount);
+
+      const totalSpace = bandWidth * barSpace;
+      const barWidth   = bandWidth - totalSpace;
+      const x          = i * bandWidth + totalSpace / 2;
+
+      const gradTop = ctx.createLinearGradient(x, centerY - fullBarMaxHeight, x, centerY);
+      gradTop.addColorStop(0, "rgba(180, 255, 220, 1)");
+      gradTop.addColorStop(0.5, "rgba(0, 255, 150, 1)");
+      gradTop.addColorStop(1, "rgba(0, 90, 40, 1)");
+
+      const gradBottom = ctx.createLinearGradient(x, centerY, x, centerY + fullBarMaxHeight);
+      gradBottom.addColorStop(0, "rgba(0, 70, 30, 1)");
+      gradBottom.addColorStop(0.5, "rgba(0, 255, 120, 1)");
+      gradBottom.addColorStop(1, "rgba(180, 255, 220, 1)");
+
+      for (let s = 0; s < filledSegments; s++) {
+        const yTop = centerY - (s + 1) * (segmentHeight + segmentGap);
+        const yBottom = centerY + s * (segmentHeight + segmentGap) + segmentGap;
+
+        const alpha = 0.4 + 0.6 * (s / segmentCount);
+
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = gradTop;
+        ctx.fillRect(x, yTop, barWidth, segmentHeight);
+
+        ctx.globalAlpha = alpha * 0.8;
+        ctx.fillStyle = gradBottom;
+        ctx.fillRect(x, yBottom, barWidth, segmentHeight);
+      }
+    }
+
+    ctx.restore();
+  }
+
+  // ----- MODE WAVES (onde fluide) -----
+  else if (visualMode === "waves") {
+    if (!timeArray || !analyser) {
+      animationId = requestAnimationFrame(drawVisualizer);
+      return;
+    }
+
+    analyser.getByteTimeDomainData(timeArray);
+
+    ctx.save();
+    ctx.lineWidth = 2.2;
+    ctx.strokeStyle = "rgba(180, 220, 255, 0.95)";
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = "rgba(120, 180, 255, 1)";
+    ctx.beginPath();
+
+    const slice = width / timeArray.length;
+    const midY = height * 0.5;
+
+    for (let i = 0; i < timeArray.length; i++) {
+      const v = (timeArray[i] - 128) / 128; // -1 à 1
+      const y = midY + v * height * 0.35;
+      const x = slice * i;
+
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // ----- MODE AURORA (bandes douces "nordiques") -----
+  else if (visualMode === "aurora") {
+    analyser.getByteFrequencyData(dataArray);
+
+    const barCount = 60;
+    const step = Math.floor(dataArray.length / barCount);
+    const barWidth = width / barCount;
+
+    ctx.save();
+    const baseY = height * 0.75;
+
+    for (let i = 0; i < barCount; i++) {
+      const value = dataArray[i * step] || 0;
+      const amp = value / 255;
+
+      const barHeight = amp * height * 0.6;
+      const x = i * barWidth;
+      const y = baseY - barHeight;
+
+      const grad = ctx.createLinearGradient(x, y, x, baseY);
+      grad.addColorStop(0, "rgba(120, 200, 255, 0.05)");
+      grad.addColorStop(0.3, "rgba(90, 220, 255, 0.22)");
+      grad.addColorStop(0.7, "rgba(120, 255, 200, 0.45)");
+      grad.addColorStop(1, "rgba(10, 40, 80, 0.0)");
+
+      ctx.fillStyle = grad;
+      ctx.fillRect(x, y, barWidth * 1.1, barHeight);
+    }
+
+    ctx.restore();
+  }
 
   animationId = requestAnimationFrame(drawVisualizer);
 }
+
 
 
   function startVisualizer() {
@@ -1084,6 +1209,12 @@ if (radioShell && skinSelect) {
     radioShell.dataset.skin = value;
   });
 }
-</script>
+if (visualModeSelect) {
+  visualModeSelect.addEventListener("change", () => {
+    visualMode = visualModeSelect.value || "dj";
+  });
+}
+
+  </script>
 </body>
 </html>
