@@ -1169,38 +1169,9 @@ function drawVisualizer() {
     loadCurrentStation(true);
   });
 
-  // Init
-  refreshStationOptions();
-</script>
-
-  <script type="module">
-  import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
-
-  // Ton élément audio existant
-  const audio = document.getElementById('audioPlayer');
-
-  // Instanciation du visualizer
-  const audioMotion = new AudioMotionAnalyzer(
-    document.getElementById('visualizer'),
-    {
-      source: audio,          // on utilise directement ton <audio>
-      height: 0,              // s’adapte à la hauteur du conteneur
-      width: 0,               // s’adapte à la largeur du conteneur
-      ansiBands: false,
-      showScaleX: false,
-      bgAlpha: 0,
-      overlay: true,
-      mode: 6,                // mode barres
-      frequencyScale: "log",
-      smoothing: 0.7,
-      gradient: "classic",    // dégradé "classic" comme ton exemple
-      ledBars: true,          // LED style
-      mirror: 1,              // miroir horizontal
-      showPeaks: true
-    }
-  );
+  // ---- Gestion des skins (Flame / Métal / Bois / Verre) ----
 if (radioShell && skinSelect) {
-  // skin par défaut au chargement
+  // skin par défaut
   radioShell.dataset.skin = "default";
   skinSelect.value = "default";
 
@@ -1209,12 +1180,118 @@ if (radioShell && skinSelect) {
     radioShell.dataset.skin = value;
   });
 }
-if (visualModeSelect) {
-  visualModeSelect.addEventListener("change", () => {
-    visualMode = visualModeSelect.value || "dj";
-  });
-}
 
-  </script>
+
+
+  // Init
+  refreshStationOptions();
+</script>
+<script type="module">
+  import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
+
+  const audioEl        = document.getElementById("audioPlayer");
+  const visualizerEl   = document.getElementById("visualizer");
+  const visualModeSelect = document.getElementById("visualModeSelect");
+
+  // Instanciation : DJ Bars = ton thème actuel
+  const audioMotion = new AudioMotionAnalyzer( visualizerEl, {
+    source: audioEl,
+    height: 0,              // s’adapte au conteneur
+    width: 0,
+    ansiBands: false,
+    showScaleX: false,
+    bgAlpha: 0,
+    overlay: true,
+    mode: 6,                // même mode que ton code actuel
+    frequencyScale: "log",
+    smoothing: 0.7,
+    gradient: "classic",
+    ledBars: true,
+    mirror: 1,
+    showPeaks: true
+  });
+
+  // --- MAPPAGE DES MODES ---
+
+  function applyVisualMode(mode) {
+    switch (mode) {
+
+      // 🎚 DJ Bars : ton visuel actuel (ne change pas)
+      case "dj":
+      default:
+        audioMotion.setOptions({
+          mode: 6,
+          gradient: "classic",
+          ledBars: true,
+          mirror: 1,
+          barSpace: 0.2,
+          radial: false,
+          lineWidth: 0,
+          fillAlpha: 0
+        });
+        break;
+
+      // 💡 Classic LEDs – 1/8e d’octave, barres plus serrées
+      case "led":
+        audioMotion.setOptions({
+          mode: 3,             // 1/8e d’octave
+          gradient: "classic",
+          ledBars: true,
+          mirror: 1,
+          barSpace: 0.5,       // plus d’espace entre les barres
+          radial: false,
+          lineWidth: 0,
+          fillAlpha: 0
+        });
+        break;
+
+      // 🌊 Waves – courbe fluide
+      case "waves":
+        audioMotion.setOptions({
+          mode: 10,            // line / area graph
+          gradient: "rainbow",
+          ledBars: false,
+          mirror: 0,
+          barSpace: 0,
+          lineWidth: 1.5,
+          fillAlpha: 0.5,
+          radial: false
+        });
+        break;
+
+      // 🌌 Aurora – mode radial “aurore boréale”
+      case "aurora":
+        audioMotion.setOptions({
+          mode: 10,
+          gradient: "prism",
+          ledBars: false,
+          mirror: 0,
+          barSpace: 0,
+          lineWidth: 1.5,
+          fillAlpha: 0.5,
+          radial: true,
+          spinSpeed: 0.5,
+          reflexRatio: 0.4,
+          reflexAlpha: 0.6,
+          reflexBright: 1.2,
+          reflexFit: true
+        });
+        break;
+    }
+  }
+
+  // Initialisation + écouteur du menu
+  if (visualModeSelect) {
+    // applique le mode correspondant à la valeur actuelle du select
+    applyVisualMode(visualModeSelect.value || "dj");
+
+    visualModeSelect.addEventListener("change", () => {
+      applyVisualMode(visualModeSelect.value || "dj");
+    });
+  } else {
+    // au cas où, DJ par défaut
+    applyVisualMode("dj");
+  }
+</script>
 </body>
 </html>
