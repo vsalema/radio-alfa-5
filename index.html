@@ -456,7 +456,91 @@
       font-size: 0.65rem;
     }
   }
-</style>
+/* --- MINI-PLAYER SMARTPHONE --- */
+@media (max-width: 480px) {
+
+  body {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
+  .radio-wrapper {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: auto;
+  }
+
+  .radio-shell {
+    border-radius: 0;
+    padding: 10px;
+    gap: 10px;
+    box-shadow: none;
+  }
+
+  /* On masque le haut et le bas pour un mini-player épuré */
+  .radio-top,
+  .radio-bottom {
+    display: none;
+  }
+
+  /* Centre en mode colonne */
+  .radio-center {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .center-right {
+    order: 1;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.9);
+    box-shadow: none;
+    background-image: none;
+  }
+
+  .center-left {
+    order: 2;
+    padding: 8px 10px;
+    min-height: 140px;
+  }
+
+  .station-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .station-select {
+    font-size: 0.85rem;
+    min-width: 0;
+  }
+
+  .volume-row {
+    font-size: 0.75rem;
+  }
+
+  .station-title {
+    font-size: 1.1rem;
+  }
+
+  .station-meta {
+    font-size: 0.75rem;
+  }
+
+  .station-logo {
+    width: 45%;
+    max-width: 180px;
+    top: 46%;
+  }
+}
+
+  
+  </style>
 
 </head>
 <body>
