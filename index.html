@@ -715,7 +715,23 @@ html, body {
   background-size: 100% 100% !important;
   position: relative;
 }
-  
+ /* --- Centrage parfait dans l'iframe --- */
+
+.radio-slider {
+  display: flex !important;
+  align-items: center !important;   /* centre verticalement */
+  justify-content: center !important; /* centre horizontalement */
+  height: 100vh !important;          /* occupe toute la hauteur de l'iframe */
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* On empêche la radio de déborder */
+.radio-body {
+  transform-origin: top left !important;
+}
+ 
   
   
   
@@ -1207,7 +1223,7 @@ document.getElementById("visualizer"),
       radioBody.style.transformOrigin = 'top left';
 
       // On ajuste la hauteur du conteneur pour ne pas avoir de scroll bizarre
-      slider.style.height = (BASE_HEIGHT * scale) + 'px';
+      slider.style.height = '100vh';
     }
 
     window.addEventListener('load', resizeRadio);
