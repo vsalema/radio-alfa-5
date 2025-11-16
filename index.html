@@ -1,1237 +1,830 @@
 <!DOCTYPE html>
-<html lang='en' class=''>
+<html lang="fr">
 <head>
-<meta charset='UTF-8'>
-  <title>CodePen Demo</title>
-<meta name="robots" content="noindex">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://use.fontawesome.com/a768aaf192.js"></script>
-<link rel="stylesheet" href="ma-radio-fit.css">
-<script src="ma-radio-fit.js" defer></script>
-	<style>
-		p { text-align:center; }
-		@media screen and (max-width: 768px) {
-			#logo { display:none; }
-		}
-	</style> 
-	
-	<style>
-   @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  margin: 0;
-  color: #3a5fb9;
-}
-
-/* ------------------------------ 
-	Radio Slider
------------------------------- */
-/* Radio General Syles */
-.radio-slider {
-	background: rgb(93, 188, 218);
-	background: -moz-linear-gradient(top, rgba(93, 188, 218, 1) 0%, rgba(72, 140, 169, 1) 100%);
-	background: -webkit-linear-gradient(top, rgba(93, 188, 218, 1) 0%, rgba(72, 140, 169, 1) 100%);
-	background: linear-gradient(to bottom, rgba(93, 188, 218, 1) 0%, rgba(72, 140, 169, 1) 100%);
-	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#5dbcda', endColorstr='#488ca9', GradientType=0);
-	background-repeat: no-repeat;
-	padding: 80px 20px 20px 20px;
-}
-.radio-slider .learn-more {
-    background: none;
-    color: #b52103;
-    display: block;
-    font-weight: 700;
-    padding: 0;
-    text-transform: uppercase;
-}
-/* Radio Container */
-.radio-body {
-	background: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_522af612c8291e78.png');
-	background-repeat: no-repeat;
-	background-size: 100%;
-	display: block;
-	margin: 0 auto;
-	max-width: 1209px;
-	height: 760px;
-	padding-top: 107px;
-    margin-top: -60px;
-}
-/* Screen */
-.radio-screen {
-	margin: 0 auto;
-	max-width: 60%;
-}
-.radio-slide-logo {
-	-webkit-align-items: center;
-	align-items: center;
-	background: rgb(255, 255, 255);
-	background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 29%, rgba(165, 165, 165, 1) 100%);
-	background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 29%, rgba(165, 165, 165, 1) 100%);
-	background: radial-gradient(ellipse at center, rgb(255, 255, 255) 29%, rgb(36, 35, 35) 100%);
-	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#a5a5a5', GradientType=1);
-	border: 2px solid #adadad;
-  border-radius: 44% 44% 0 0;
-	background-image: radial-gradient(rgba(250, 244, 244, 0.05), rgba(12, 12, 12, 0.5)), url("https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_51c96f7945128b7f.gif");
-  background-size: 460px 180px;
-  
-  
-  
-  box-shadow: inset 22px 22px 30px -20px rgba(0, 0, 0, 0.8);
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	height: 230px;
-	/*-webkit-justify-content: center;
-	justify-content: center;*/
-	margin: 0 auto;
-	max-width: 475px;
-	padding: 20px 30px;
-	-webkit-clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
-	clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
-  border-image: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_48d677e821f2ccb2.png') 0% stretch;      
-}
-/*.radio-slide-logo *::before, .radio-slide-logo *::after {
-    -webkit-box-sizing: unset;
-    -moz-box-sizing: unset;
-    box-sizing: unset;
-}*/
-.clip-svg {
-    height: 0;
-    position: absolute;
-    width: 0;
-}
-.clip {
-    -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
-    clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
-    /*-webkit-clip-path: url("#clipping");*/
-    clip-path: url("#clipping");
-}
-.slide-wrap {
-	overflow: hidden;
-    /*position: absolute;*/
-	position: relative;
-}
-.radio-slide-logo ul {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-align-items: center;
-	align-items: center;
-	position: absolute;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-.radio-slide-logo li {
-	position: relative;
-    /*position: absolute;*/
-	display: block;
-	float: left;
-	margin: 0;
-	padding: 0 40px;
-	text-align: center;
-	width: 480px;
-}
-.radio-slide-logo li img {
-    max-width: 360px;
-    max-height: 140px;
-}
-
-.play-wrap {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-justify-content: center;
-	justify-content: center;
-	margin-top: -90px;
-	position: relative;
-	text-align: center;
-}
-.play-container {
-	position: relative;
-    width: 100%;
-}
-.play-container img {
-  max-width: 100%;
-}
-.radio-play-btn {
-	color: #b52103;
-	left: 0;
-	margin-top: 65px;
-	position: absolute;
-	font-size: 50px;
-	width: 100%;
-}
-.radio-play-btn i {
-	cursor: pointer;
-}
-.fa, .fa::before, .fa::after {
-    -webkit-box-sizing: unset;
-    -moz-box-sizing: unset;
-    box-sizing: unset;
-}
-.radio-play-btn .fa-play {
-	margin-left: 7px;
-}
-/* Tuner */
-.radio-tuner {
-	background: #fff;
-	border: 3px solid #651100;
-	border-radius: 8px;
-	box-shadow: inset 18px 18px 30px -20px rgb(239, 144, 18);
-	margin: 25px auto 0 auto;
-	max-width: 80%;
-	position: relative;
-}
-.tuner-dial {
-	background: #ff0000;
-	box-shadow: 0px 0px 7px red;
-	height: 62px;
-	position: absolute;
-	width: 2px;
-	left: 6.5%;
-	transition: all .4s ease-in-out;
-	z-index: 1;
-}
-.radio-clients {
-	align-items: center;
-	border-bottom: 2px dotted #000;
-	border-top: 2px dotted #000;
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-flow: row wrap;
-	flex-flow: row wrap;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-	list-style: none outside none;
-	margin: 10px 20px;
-	padding: 0;
-}
-.radio-clients li {
-	padding: 5px 10px;
-}
-.radio-clients li img {
-	vertical-align: bottom;
-	-webkit-filter: contrast(0);
-	filter: brightness(0);
-	transition: filter .6s ease-in-out;
-    width: 100%;
-}
-.radio-clients li.active img {
-	-webkit-filter: contrast(1);
-	filter: brightness(1);
-}
-/* Nav Buttons & Slide Content */
-/* Wrap */
-.radio-display {
-	-webkit-align-items: center;
-	align-items: center;
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-flow: row wrap;
-	flex-flow: row wrap;
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-	margin: 15px auto 0 auto;
-	max-width: 75%;
-}
-/* Nav */
-.radio-nav {
-	cursor: pointer;
-	max-width: 110px;
-}
-.radio-nav img {
-    width: 100%;
-}
-/* Slide Content */
-.radio-slide-content {
-	background: #fff;
-	border: 3px solid #adadad;
-	border-radius: 8px;
-	box-shadow: inset 18px 18px 30px -20px rgba(0, 0, 0, 0.8);
-	padding: 10px 20px;
-	text-align: center;
-	width: 65%;
-	height: 130px;
-	transition: height .2s ease-in-out;
-    background-image: url("https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_86fb12fc284e0222.png");
-    background-position-y: -0px;
-    background-position-x: 0px;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-.radio-slide-title {
-	font-size: 18px;
-	margin-bottom: 0;
-	margin-top: 0;
-color: red;
-  }
-.radio-slide-content p {
-	margin-top: 0;
-	margin-bottom: 5px;
-}
-
-/* ------------------------------ 
-	1199px
------------------------------- */
-@media screen and (max-width: 1199px) {
-
-	/* Radio Slider */
-	.radio-body {
-	    max-width: 720px;
-	    padding-top: 60px;
-	    height: 450px;
-	    margin-top: -40px;
-	}
-	.radio-screen {
-	    max-width: 450px;
-	}
-	.radio-slide-logo {
-	    height: 140px;
-	    max-width: 300px;
-	}
-	.radio-slide-logo li {
-	    width: 300px;
-	}
-	.radio-slide-logo li img {
-	    max-width: 207px;
-	    max-height: 80px;
-	}
-	.play-wrap {
-	    margin-top: -55px;
-	}
-	.radio-play-btn {
-	    margin-top: 40px;
-	    font-size: 30px;
-	}
-	.radio-tuner {
-	    margin: 15px auto 0 auto;
-	}
-	.radio-clients {
-	    margin: 5px 10px;
-	}
-	.radio-clients li {
-	    max-width: 90px;
-	    display: flex;
-	    align-items: center;
-	}
-	.tuner-dial {
-	    height: 51px;
-	}
-	.radio-display {
-	    margin: 7px auto 0 auto;
-	}
-	.radio-nav {
-	    max-width: 70px;
-	}
-	.radio-slide-content {
-	    height: 75px;
-	}
-	.radio-slide-title {
-	    font-size: 22px;
-	    margin-bottom: 5px;
-	}
-	.active-content p {
-	    display: none;
-	}
-
-}
-
-/* ------------------------------ 
-	768px
------------------------------- */
-@media screen and (max-width: 768px) {
-	/* Radio Slider */
-	.radio-body {
-		background: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_8c4faaeab1cba4a1.png');
-		background-repeat: no-repeat;
-		background-size: 100%;
-	    max-width: 450px;
-	    padding-top: 60px;
-	    height: 510px;
-	    margin-top: 0;
-	}
-	.radio-screen {
-	    max-width: 400px;
-	}
-	.radio-slide-logo {
-	    height: 135px;
-	    max-width: 280px;
-	}
-	.radio-slide-logo li {
-	    width: 280px;
-	}
-	.radio-slide-logo li img {
-		max-width: 191px;
-	}
-	.play-wrap {
-	    margin-top: -48px;
-	}
-	.radio-play-btn {
-	    margin-top: 34px;
-	}
-	.radio-clients li {
-	    max-width: 50px;
-	}
-	.tuner-dial {
-		height: 43px;
-	}
-	.radio-display {
-		max-width: 80%;
-		-webkit-justify-content: center;
-		justify-content: center;
-	}
-	.radio-slide-content {
-	    order: -1;
-	    width: 100%;
-	    margin: 5px 0;
-	}
-	.radio-nav {
-	    margin: 5px 20px;
-	    max-width: 65px;
-	}
-
-}
-
-
-
-
-/* ------------------------------ 
-	640px
------------------------------- */
-@media screen and (max-width: 640px) {
-	/* Audio Player */
-	.player-wrap {
-    	max-width: 215px;
+  <meta charset="UTF-8" />
+  <title>Flame FM – Web Radio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    .play-img-wrap {
-    	margin-right: 0;
-    	border-top-right-radius: 5px;
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #333 0, #050505 55%);
+      color: #fff;
     }
-    .play-img-wrap img {
-	    border-top-right-radius: 5px;
-	}
-    .player-description {
-	    width: auto;
-	    padding: 0 10px 10px;
-	}
 
-}
-/* ------------------------------ 
-	479px RADIO SLIDER ONLY!!!
------------------------------- */
-@media screen and (max-width: 479px) {
-	.radio-slider {
-		padding: 120px 0 20px 0;
-	}
-	.radio-body {
-	   
-	    background-size: 100% 100%;
-	    max-width: 100%;
-	}
-	.radio-tuner {
-		max-width: 95%;
-	}
-	.radio-display {
-	    max-width: 95%;
-	}
+    .radio-wrapper {
+      width: 900px;
+      max-width: 96vw;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
 
-}
-/* ------------------------------ 
-	380px RADIO SLIDER ONLY!!!
------------------------------- */
-@media screen and (max-width: 380px) {
-	.radio-body {
-		padding-top: 65px;
-	}
-	.radio-slide-logo {
-	    max-width: 220px;
-	}
-	.radio-slide-logo li {
-	    width: 220px;
-	}
-	.radio-slide-logo li img {
-	    max-width: 140px;
-	}
-	.play-wrap {
-		align-items: center;
-	}
-	.radio-play-btn {
-	    font-size: 26px;
-	    margin-top: 0;
-	    top: 30px;
-	}
+    .radio-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.3) 0, transparent 45%),
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,0.28) 0, transparent 45%),
+        linear-gradient(135deg, #ff6a00, #ff3d00 45%, #b02000 100%);
+      box-shadow:
+        0 28px 60px rgba(0,0,0,0.8),
+        inset 0 0 0 3px rgba(0,0,0,0.6);
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+   background-image: url("https://t4.ftcdn.net/jpg/05/10/48/51/240_F_510485158_vyozgwyVPi2SUP246x2CIXyQOCNvyvtp.jpg");
+  background-repeat: no-repeat;
+  background-size: 178%;
+    
+    }
 
-}
-/* ------------------------------ 
-	340px
------------------------------- */
-@media screen and (max-width: 340px) {
-	.radio-play-btn {
-	    top: 25px;
-	}
+    .radio-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
-}
-.visualizer {
-  padding: 1.3rem;
-  border-radius: 1.5rem;
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: #ffe0b2;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    }
+
+    .freq-window {
+      flex: 1;
+      margin: 0 1rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #262626, #050505);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:
+        inset 0 0 12px rgba(0,0,0,0.9),
+        0 2px 5px rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .freq-scale {
+      flex: 1;
+      font-size: 0.75rem;
+      color: #e0e0e0;
+      opacity: 0.9;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .freq-row {
+      display: flex;
+      justify-content: space-between;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .freq-current {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffcc80;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+      margin-left: 12px;
+    }
+
+    .status-led {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #ff5252;
+      box-shadow: 0 0 12px rgba(255,82,82,0.9);
+      margin-left: 10px;
+    }
+
+    .radio-mode {
+      font-size: 0.75rem;
+      text-align: right;
+      opacity: 0.9;
+    }
+
+    .radio-center {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .center-left {
+      border-radius: 18px;
+      padding: 14px 18px;
+      background:
+        radial-gradient(circle at center, rgba(0,0,0,0.75) 0, rgba(0,0,0,0.9) 60%),
+        repeating-linear-gradient(
+          60deg,
+          rgba(255,255,255,0.04) 0,
+          rgba(255,255,255,0.04) 2px,
+          transparent 2px,
+          transparent 6px
+        );
+      box-shadow:
+        inset 0 0 22px rgba(0,0,0,0.9),
+        0 4px 10px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-screen {
   position: absolute;
-  overflow: hidden;
-  opacity: 0.8;
-  z-index: -1;
-  height: 228px;
-  width: 496px;
-  margin-left: -50px;
-  margin-top: 128px;
-  display: flex;
-  max-width: 59%;
-  text-align: center;
-  margin-right: -67px;
+  inset: 0;
+  border-radius: 16px;
+
+  /* Lumière + transparence */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.18) 0%,
+      rgba(255,255,255,0.02) 40%,
+      rgba(255,255,255,0.08) 60%,
+      rgba(255,255,255,0.01) 100%
+    ),
+    rgba(255,255,255,0.03);
+
+  backdrop-filter: blur(3px) brightness(1.08);
+  -webkit-backdrop-filter: blur(3px) brightness(1.08);
+
+  /* ★★★ Border effet vitre ★★★ */
+  border: 1.8px solid rgba(255, 255, 255, 0.42);          /* bord blanc léger */
+  box-shadow:
+    inset 0 0 8px rgba(255,255,255,0.20),                /* luminosité intérieure */
+    inset 0 0 22px rgba(0,0,0,0.35),                     /* ombre intérieure */
+    0 3px 12px rgba(0,0,0,0.45),                         /* ombre sous la vitre */
+    0 -2px 6px rgba(255,255,255,0.25);                   /* reflet en haut */
+
+  opacity: 0.28;
+  z-index: 4;
+  pointer-events: none;
 }
-  @import url( 
-'https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
-  video {
-  border-radius: 45% 45% 0 0;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  height: 171px;
+
+
+    
+ #visualizerCanvas {
   position: absolute;
-  width: 409px;
-  top: 133px;
-  max-width: 647px;
-  left: 366px;
-  margin-left: 53px;
+  inset: 0;
+  z-index: 0;
+}
+
+.station-logo {
+  position: absolute;
+  z-index: 1;
+}
+
+.station-title,
+.station-meta {
+  position: relative;
   z-index: 2;
-visibility: hidden;
-  }
-
-  canvas {
-  border-radius: 41% 41% 0 0;
-  overflow: hidden;
-  display: flex;
-  position: absolute;
-  width: 454px;
-  max-width: 452px;
-  max-block-size: 464px;
-  top: 5px;
-  left: 30px;
 }
-  
- .playy {
-  position: relative;
-  height: 230px;
-  margin: 0 auto;
-    margin-top: 0px;
-    margin-right: auto;
-    margin-left: auto;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 472px;
-  padding: 20px 30px;
-  width: 2687px;
-  margin-left: -73px;
-  margin-right: -408px;
-  margin-top: -40px;
-}
-.im { 
-border-image: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_e7b19bf0b5926183.gif') 0% stretch;
-  display: block;
-  box-sizing: border-box;
-  margin: 0px -20px;
-  max-width: 20px;
-  width: 100%;
-  position: absolute;
-  min-height: auto;
+   /* Canvas visualizer derrière le logo */
+    #visualizerCanvas {
+      position: absolute;
+      inset: 10px;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      z-index: 0;
+      opacity: 0.8;
+      pointer-events: none;
     }
 
-  /* --- Overrides responsives pour tuner + contenu --- */
+    .station-logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      max-width: 260px;
+      aspect-ratio: 1 / 1;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.9;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.8));
+      pointer-events: none;
+      z-index: 0;
+    }
 
-/* On annule le width:100% que je t'avais fait ajouter */
-.radio-tuner {
-  width: auto;
-  max-width: 80%;   /* comme dans ton CSS d'origine */
-  margin-left: auto;
-  margin-right: auto;
-}
+    .station-title {
+      position: relative;
+      z-index: 1;
+      font-size: 1.7rem;
+      font-weight: 800;
+      text-align: center;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.9);
+    }
 
-.radio-display {
-  width: auto;
-  max-width: 75%;   /* comme dans ton CSS d'origine */
-  margin-left: auto;
-  margin-right: auto;
-}
-.radio-body {
-  position: relative;
-  overflow: hidden;  /* coupe tout ce qui dépasse de l'image de fond */
-}
+    .station-meta {
+      position: relative;
+      z-index: 1;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      text-align: center;
+    }
 
- /* Le bloc texte adapte sa hauteur au contenu, mais garde la largeur prévue */
-.radio-slide-content {
-  height: auto;   /* au lieu de 130px */
-}
+    .center-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background:
+        linear-gradient(to bottom right, rgba(0,0,0,0.92), rgba(0,0,0,0.85));
+      box-shadow:
+        inset 0 0 18px rgba(0,0,0,0.9),
+        0 4px 10px rgba(0,0,0,0.7);
+    }
 
-/* On s'assure aussi de ça dans les media queries */
-@media screen and (max-width: 1199px) {
-  .radio-slide-content {
-    height: auto; /* override du 75px */
-  }
-}
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
 
-@media screen and (max-width: 768px) {
-  .radio-slide-content {
-    height: auto;
-  }
-}
- /* --- Ajustements position mobile pour le tuner + display --- */
+    button, select, input {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      outline: none;
+    }
 
-/* Tablette / petit écran */
-@media screen and (max-width: 768px) {
-  .radio-tuner {
-    margin-top: 30px;   /* descend le bloc tuner */
-  }
+    button {
+      cursor: pointer;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(4px);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+    }
 
-  .radio-display {
-    margin-top: 25px;   /* descend le bloc avec le texte + flèches */
-  }
-}
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.18);
+    }
 
-/* Téléphones (portrait) */
-@media screen and (max-width: 479px) {
-  .radio-tuner {
-    margin-top: 45px;   /* encore un peu plus bas sur très petit écran */
-  }
+    button:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
 
-  .radio-display {
-    margin-top: 35px;
-  }
-}
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9800, #ff5722);
+      border: none;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+      font-weight: 600;
+    }
 
-/* Très petits écrans */
-@media screen and (max-width: 380px) {
-  .radio-tuner {
-    margin-top: 55px;
-  }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ffb74d, #ff7043);
+    }
 
-  .radio-display {
-    margin-top: 40px;
-  }
-}
-/* Ajustements précis pour la version mobile */
-@media screen and (max-width: 480px) {
+    .station-select {
+      min-width: 210px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.24);
+    }
 
-  .radio-tuner {
-    margin-top: 52px !important;
-  }
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
 
-  .radio-display {
-    margin-top: 0px !important;
-  }
-}
-/* Ajustement précis des flèches de navigation pour mobile */
-@media screen and (max-width: 480px) {
+    .volume-row input[type="range"] {
+      flex: 1;
+    }
 
-  .radio-nav-previous,
-  .radio-nav-next {
-    margin-top: -4px !important;
-  }
+    .radio-bottom {
+      border-radius: 18px;
+      padding: 10px 14px;
+      background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.75));
+      box-shadow:
+        inset 0 0 12px rgba(0,0,0,0.9),
+        0 3px 8px rgba(0,0,0,0.7);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-}
-/* Centrer le visualizer dans .radio-screen en mobile */
-@media screen and (max-width: 480px) {
+    .add-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
 
-  .radio-screen {
-    position: relative;
-  }
+    .add-form input {
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      min-width: 145px;
+    }
 
-  /* Ciblage par ID pour être plus fort que le JS */
-  #visualizer {
-    position: absolute !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    top: 40px !important;      /* ajuste cette valeur pour monter/descendre */
-    margin: 0 !important;
-    width: 90% !important;     /* le JS peut changer width, mais 90% + !important gagne */
-    max-width: 400px !important;
-    z-index: 2 !important;     /* pour qu’il soit visible, pas derrière le reste */
-  }
+    .hint {
+      opacity: 0.75;
+    }
 
-  /* On recentre aussi le canvas à l'intérieur */
-  #visualizer canvas {
-    position: relative !important;
-    width: 100% !important;
-    left: 0 !important;
-    top: 0 !important;
-  }
-} 
-/* === MODE "EMBED IFRAME" === */
-
-/* L’iframe donne la taille de la fenêtre, on remplit tout */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-/* On centre la radio dans l’espace disponible */
-.radio-slider {
-  min-height: 100vh;             /* important dans une iframe pleine hauteur */
-  display: flex;
+    @media (max-width: 780px) {
+      .radio-shell {
+        padding: 14px;
+      }
+      .radio-center {
+        grid-template-columns: 1fr;
+      }
+      .station-title {
+        font-size: 1.3rem;
+      }
+    }
+  
+  .station-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: center;
-  padding: 0 !important;         /* on enlève le gros padding du haut */
+  gap: 14px;
 }
 
-/* On fige la radio à sa taille de base : 1209 x 765 */
-.radio-body {
-  max-width: none !important;
-  width: 1209px !important;
-  height: 765px !important;
-  margin: 0 !important;
-  padding-top: 107px !important; /* comme dans ta version desktop */
-  background-size: 100% 100% !important;
-  position: relative;
-}
- /* --- Centrage parfait dans l'iframe --- */
-
-.radio-slider {
-  display: flex !important;
-  align-items: center !important;   /* centre verticalement */
-  justify-content: center !important; /* centre horizontalement */
-  height: 100vh !important;          /* occupe toute la hauteur de l'iframe */
-  padding: 0 !important;
-  margin: 0 !important;
-  box-sizing: border-box;
+.nav-btn {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+  transition: 0.2s ease;
+  white-space: nowrap;
 }
 
-/* On empêche la radio de déborder */
-.radio-body {
-  transform-origin: top left !important;
+.nav-btn:hover {
+  background: rgba(255,255,255,0.18);
 }
- 
-  
-  
-  
+
+.station-select {
+  width: 100%;
+  min-width: 180px;
+  text-align: center;
+}
+@media (max-width: 560px) {
+  .nav-btn {
+    padding: 10px;          /* plus compact */
+    font-size: 1.2rem;      /* icône large */
+  }
+
+  .nav-btn::after {
+    content: "";            /* retire le texte */
+  }
+}
+
   
   </style>
 </head>
 <body>
-  <body class="home">
-  
-    
-    
-    <div class="radio-slider">
-  
-      
-      
-      <div class="radio-body">
-    
-        
-        
-        <div class="radio-screen">
-      
-      <div class="radio-slide-logo clip">
-       
-        
-        <div class="container">
-          
-          
-        </div> 
-         
-        
-   <div class="canv visualizer" id="visualizer"></div>
-        
-        <div class="slide-wrap">
-          
-          <ul>
-<li class="slide-one active" data-audio-src="https://n16a-eu.rcs.revma.com/amrbkhqtkm0uv?rj-ttl=5&rj-tok=AAABjyZZV10A8pNBeIWHkkzM-w" data-title="Radio Alfa" data-description="A Rádio Alfa é uma estação de rádio parisiense, dirigida à comunidade lusófona de França. Foi lançada a 5 de outubro de 1987 pela Associação Luso-Francesa do Audiovisual. A sede e os estúdios localizam-se em Créteil, no sudeste de Paris."
-              data-link="#1">
-              <img src="https://radioalfa.net/wp-content/uploads/2023/02/logo-radio-alfa-DAB-avril-2021-294x300.png" />
-            </li>
+<div class="radio-wrapper">
+  <div class="radio-shell">
+    <!-- Haut -->
+    <div class="radio-top">
+      <div class="brand">FLAME&nbsp;FM</div>
 
-            <li class="slide-two" data-audio-src="https://stream-icy.bauermedia.pt/comercial.mp3" data-title="Radio Comercial" data-description="A Rádio Comercial é uma rádio nacional portuguesa (com cobertura em Portugal Continental) do grupo Bauer Media Audio Portugal. Passa música pop, dance e rock actual e dos últimos dez anos. Actualmente, o seu director de..  "
-              data-link="#2">
-              <img src="https://www.zupimages.net/up/24/18/ywnd.png" />
-            </li>
-
-            <li class="slide-three" data-audio-src="	
-https://23543.live.streamtheworld.com/RADIO_RENASCENCA.mp3" data-title="Radio Renascenca" data-description="Vitae pulvinar metus nisl quis ex. Donec tempor quam non ligula sodales, vel porttitor mauris bibendum. Donec eget velit a diam congue commodo."
-              data-link="#3">
-              <img src="https://especiais.rr.pt/sondagens/img/rr/renascenca.png" />
-            </li>
-
-            <li class="slide-four" data-audio-src="https://stream-icy.bauermedia.pt/m80.aac" data-title="M80" data-description="Pellentesque maximus mi eget arcu cursus, sit amet viverra arcu luctus."
-              data-link="#4">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/M80_Portugal.svg" />
-            </li>
-
-            <li class="slide-five" data-audio-src="https://stream-icy.bauermedia.pt/cidade.aac" data-title="Cidade FM" data-description="Cidade FM, anteriormente chamada Rádio Cidade, é uma rádio portuguesa que emite essencialmente música dos tops nacionais e internacionais nos géneros pop, hip hop, R&B, reggaeton."
-              data-link="#5">
-              <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_0f316d41dec0afce.png" />
-            </li>
-
-            <li class="slide-six" data-audio-src="https://radiocast.rtp.pt/antena180a.mp3" data-title="Antena 1" data-description="A Antena 1 é uma emissora de radiodifusão do Grupo RTP – Rádio e Televisão de Portugal. A sua programação é baseada em conteúdos generalistas e programas de autor, com forte incisão em desporto e música."
-              data-link="#6">
-              <img src="https://upload.wikimedia.org/wikipedia/fr/7/7c/Antena_1_%28Portugal%29_logo.png" />
-            </li>
-          </ul>
-
+      <div class="freq-window">
+        <div class="freq-scale">
+          <div class="freq-row">
+            <span>FM</span>
+            <span>88</span><span>92</span><span>96</span><span>100</span><span>104</span><span>108</span>
+          </div>
+          <div class="freq-row" style="opacity:0.7;">
+            <span>MHz</span>
+            <span>●</span><span>●</span><span>●</span><span>●</span><span>●</span><span>●</span>
+          </div>
         </div>
-      
+        <div class="freq-current" id="freqMain">00.0</div>
+        <div class="status-led" id="statusLed"></div>
       </div>
 
-      <div class="play-wrap">
-        <div class="play-container">
-          
-          
-          
-          
-          <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_66c19d60443ec52b.png" />
+      <div class="radio-mode">FM · WEB STREAM</div>
+    </div>
+
+    <!-- Centre -->
+    <div class="radio-center">
+      <div class="center-left">
+        <!-- Visualizer derrière le logo -->
+        <canvas id="visualizerCanvas"></canvas>
+        <div class="glass-screen"></div>
+        <div class="station-logo" id="stationLogo"></div>
+
+        <div class="station-title" id="stationName">Sélectionne une station</div>
+        <div class="station-meta" id="stationMeta">—</div>
+      </div>
+
+      <div class="center-right">
+        <div class="controls-row station-row">
+  <button id="prevBtn" class="nav-btn" data-full="⏮ Précédente">⏮</button>
+
+  <select id="stationSelect" class="station-select"></select>
+
+  <button id="nextBtn" class="nav-btn" data-full="Suivante ⏭">⏭</button>
+</div>
+        <div class="controls-row">
+          <button id="playPauseBtn" class="btn-primary">▶️ Lecture</button>
+          <button id="stopBtn">⏹ Stop</button>
         </div>
-        
-        
-        
-        <div class="radio-play-btn">
-          
-<audio class="music" hidden controls crossorigin="anonymous" loop src="https://n16a-eu.rcs.revma.com/amrbkhqtkm0uv?rj-ttl=5&rj-tok=AAABjyZZV10A8pNBeIWHkkzM-w" id="audio"></audio>
-          <i class="fa fa-play" aria-hidden="true"></i>
+        <div class="volume-row">
+          <span>Volume</span>
+          <input type="range" min="0" max="1" step="0.01" id="volumeSlider" />
         </div>
       </div>
     </div>
 
-    <div class="radio-tuner">
-      <div class="tuner-dial"></div>
-      <ul class="radio-clients">
-        <li class="active">
-          <img src="https://www.zupimages.net/up/24/18/k36t.png" alt="radio alfa" />
-        </li>
-        <li>
-          <img src="https://www.zupimages.net/up/24/18/d41l.png" alt="Radio Comercial" />
-        </li>
-        <li>
-          <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_7de54f4d87731611.png" alt="Renascenca" />
-        </li>
-        <li>
-          <img src="https://www.zupimages.net/up/24/18/6gby.png" alt="Chocolate Pen" />
-        </li>
-        <li>
-          <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_e4fac4b44eec8600.png" alt="cidade fm"/>
-        </li>
-        <li>
-          <img src="https://www.zupimages.net/up/24/18/sbsr.png" alt="Antena 1" />
-        </li>
-      </ul>
+    <!-- Bas -->
+    <div class="radio-bottom">
+      <div class="hint">
+        💡 Tu peux brancher tes propres radios : indique simplement nom, fréquence et URL de flux audio.
+      </div>
+      <form class="add-form" id="addForm">
+        <input type="text" id="newName" placeholder="Nom de la station" required />
+        <input type="text" id="newFreq" placeholder="Fréquence (ex : 92.3)" required />
+        <input type="text" id="newUrl" placeholder="URL du flux audio" required />
+        <button type="submit">➕ Ajouter</button>
+      </form>
     </div>
+  </div>
+</div>
 
-    <div class="radio-display">
-      <div class="radio-nav radio-nav-previous">
-        <i class="im">.</i>
-        <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_03e68d48949bfbe0.png" class="img-fluid" />
-      </div>
-      
-      
-      
-      
-      
-      
-      <div class="radio-slide-content">
-        <div class="active-content">
-          <h3 class="radio-slide-title">Slide Title</h3>
-          <p>Slide description text.</p>
-         
-        </div>
-      </div>
-      
-      
-      <div class="radio-nav radio-nav-next">
-        <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_b3eb8e6ac1f7d4b0.png" class="img-fluid" />
-      </div>
-    </div>
+<!-- Player audio central -->
+<audio id="audioPlayer" crossorigin="anonymous"></audio>
 
-  
-      
-      
-     
-      
-      
-      
-      
-      
-      </div>
-</div><!-- .radio-slider -->
-
-    
-    
-    <svg class="clip-svg" width="0" height="0">
-  <defs>
-    <clipPath id="clipping" clipPathUnits="objectBoundingBox">
-      <polygon points=".5 0, 1 0, 1 .78, .5 1, 0 .78, 0 0" />
-    </clipPath>
-  </defs>
-</svg>
 <script>
-  jQuery(document).ready(function ($) {
-
-  // Detect If Browser is IE
-  function detectIE() {
-    var ua = window.navigator.userAgent;
-
-    var msie = ua.indexOf('MSIE ');
-    if (msie > 0) {
-      // IE 10 or older => return version number
-      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+  // --- Stations (tu peux en ajouter autant que tu veux) ---
+  const stations = [
+    {
+      name: "Radio Alfa",
+      freq: 98.6,
+      url: "https://n16a-eu.rcs.revma.com/amrbkhqtkm0uv?rj-ttl=5&rj-tok=AAABjyZZV10A8pNBeIWHkkzM-w",
+      city: "Paris",
+      desc: "Communauté lusophone",
+      logo: "https://radioalfa.net/wp-content/uploads/2023/02/logo-radio-alfa-DAB-avril-2021-294x300.png"
+    },
+    {
+      name: "Radio Comercial",
+      freq: 97.7,
+      url: "https://stream-icy.bauermedia.pt/comercial.mp3",
+      city: "Lisboa",
+      desc: "Hits & talk",
+      logo: "https://www.zupimages.net/up/24/18/ywnd.png"
+    },
+    {
+      name: "M80",
+      freq: 104.7,
+      url: "https://stream-icy.bauermedia.pt/m80.aac",
+      city: "Portugal",
+      desc: "80s / Classics",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/0/02/M80_Portugal.svg"
     }
+  ];
 
-    var trident = ua.indexOf('Trident/');
-    if (trident > 0) {
-      // IE 11 => return version number
-      var rv = ua.indexOf('rv:');
-      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-    }
+  const audio = document.getElementById("audioPlayer");
+  const stationSelect = document.getElementById("stationSelect");
+  const stationName = document.getElementById("stationName");
+  const stationMeta = document.getElementById("stationMeta");
+  const freqMain = document.getElementById("freqMain");
+  const statusLed = document.getElementById("statusLed");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const stopBtn = document.getElementById("stopBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const addForm = document.getElementById("addForm");
+  const newName = document.getElementById("newName");
+  const newFreq = document.getElementById("newFreq");
+  const newUrl = document.getElementById("newUrl");
+  const volumeSlider = document.getElementById("volumeSlider");
 
-    var edge = ua.indexOf('Edge/');
-    if (edge > 0) {
-      // Edge (IE 12+) => return version number
-      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
-    }
+  let currentIndex = -1;
+  let isPlaying = false;
 
-    // other browser
-    return false;
+  audio.volume = 0.7;
+  volumeSlider.value = audio.volume;
+
+  // --- Visualizer ---
+  let audioCtx = null;
+  let analyser = null;
+  let dataArray = null;
+  let sourceNode = null;
+  let animationId = null;
+  const canvas = document.getElementById("visualizerCanvas");
+  let ctx = null;
+  if (canvas && canvas.getContext) {
+    ctx = canvas.getContext("2d");
   }
 
-  var version = detectIE();
-
-
-  // Slider Functionality
-  var slideCount = $('.radio-slide-logo ul li').length;
-  if (version > 0) {
-    var slideWidth = $('.radio-slide-logo ul li img').width() + 80;
-  } else {
-    var slideWidth = $('.radio-slide-logo ul li').width() + 80;
-  }
-  var slideHeight = $('.radio-slide-logo').height();
-  var sliderUlWidth = slideCount * slideWidth;
-
-  $('.radio-slide-logo .slide-wrap').css({ width: slideWidth - 80, height: slideHeight });
-
-  $('.radio-slide-logo ul').css({ width: sliderUlWidth, marginLeft: -slideWidth - 40, height: slideHeight });
-
-  $('.radio-slide-logo ul li:last-child').prependTo('.radio-slide-logo ul');
-
-
-  // Add active class for previous slide
-  function prevSlide() {
-    // Main Slide
-    var active = $('.radio-slide-logo ul li.active').removeClass('active');
-    if (active.prev() && active.prev().length) {
-      active.prev().addClass('active');
-    } else {
-      active.siblings(":first").addClass('active');
-    }
-
-    // Tuner Icon
-    var activeTuner = $('ul.radio-clients li.active').removeClass('active');
-    if (activeTuner.prev() && activeTuner.prev().length) {
-      activeTuner.prev().addClass('active');
-    } else {
-      activeTuner.siblings(":last").addClass('active');
-    }
-  };
-
-
-  // Add active class for next slide
-  function nextSlide() {
-    // Main Slide
-    var active = $('.radio-slide-logo ul li.active').removeClass('active');
-    if (active.next() && active.next().length) {
-      active.next().addClass('active');
-    } else {
-      active.siblings(":first").addClass('active');
-    }
-
-    // Tuner Icon
-    var activeTuner = $('ul.radio-clients li.active').removeClass('active');
-    if (activeTuner.next() && activeTuner.next().length) {
-      activeTuner.next().addClass('active');
-    } else {
-      activeTuner.siblings(":first").addClass('active');
-    }
-  };
-
-
-  // Move to previous slide
-  function moveLeft() {
-    $('.radio-slide-logo ul').animate({
-      left: +slideWidth },
-    400, function () {
-      $('.radio-slide-logo ul li:last-child').prependTo('.radio-slide-logo ul');
-      $('.radio-slide-logo ul').css('left', '');
+  function refreshStationOptions() {
+    stationSelect.innerHTML = "";
+    stations.sort((a, b) => a.freq - b.freq);
+    stations.forEach((st, index) => {
+      const opt = document.createElement("option");
+      opt.value = index;
+      opt.textContent = `${st.freq.toFixed(1)} MHz – ${st.name}`;
+      stationSelect.appendChild(opt);
     });
-  };
 
-
-  // Move to next slide
-  function moveRight() {
-    $('.radio-slide-logo ul').animate({
-      left: -slideWidth },
-    400, function () {
-      $('.radio-slide-logo ul li:first-child').appendTo('.radio-slide-logo ul');
-      $('.radio-slide-logo ul').css('left', '');
-    });
-  };
-
-
-  // Swap audio source
-  function audioSource() {
-    var audioPlayer = $('.radio-play-btn .music');
-    var currentAudio = $('.radio-slide-logo li.active').data('audio-src');
-    audioPlayer.attr('src', currentAudio);
-  }
-
-
-  // Swap slide text
-  function slideText() {
-    var slideTitle = $('.radio-slide-logo li.active').data('title');
-    var slideDescription = $('.radio-slide-logo li.active').data('description');
-    var slideLink = $('.radio-slide-logo li.active').data('link');
-    var currentTitle = $('.radio-slide-content .radio-slide-title');
-    var currentDescription = $('.radio-slide-content p');
-    var currentLink = $('.radio-slide-content a');
-
-    currentTitle.text(slideTitle);
-    currentDescription.text(slideDescription);
-    currentLink.attr('href', slideLink);
-  }
-
-  slideText();
-
-
-  // Adjust slide content height
-  function slideContentHeight() {
-    var contentHeight = $('.active-content').height();
-    $('.radio-slide-content').css('height', contentHeight + 25);
-  }
-
-  //slideContentHeight();
-
-
-  // Reposition turner depending on active slide
-  if ($('body').hasClass('home')) {
-    function tunerDial() {
-      var tunerOffset = $('.radio-clients li.active').offset();
-      var tunerLeft = tunerOffset.left;
-      var tunerWidth = $('.radio-clients li.active').width();
-      var containerOffset = $('.radio-tuner').offset();
-      var containerLeft = containerOffset.left;
-      var tunerMath = tunerWidth / 2 + tunerLeft - containerLeft + 10;
-      var tunerPosition = Math.round(tunerMath);
-      $('.tuner-dial').css('left', tunerPosition + 'px');
-    };
-
-    // Update tuner position
-    $(function () {
-      setInterval(function () {
-        tunerDial();
-      }, 0);
-    });
-  }
-
-
-  // Responsive Slider Width
-  $(window).resize(function () {
-    var slideCount = $('.radio-slide-logo ul li').length;
-    var slideWidth = $('.radio-slide-logo ul li').width() + 80;
-    var slideHeight = $('.radio-slide-logo').height();
-    var sliderUlWidth = slideCount * slideWidth;
-
-    $('.radio-slide-logo .slide-wrap').css({ width: slideWidth - 80, height: slideHeight });
-
-    $('.radio-slide-logo ul').css({ width: sliderUlWidth, marginLeft: -slideWidth - 40, height: slideHeight });
-  });
-
-
-
-
-
-  // Home Page Audio Functionality
-  $(".radio-play-btn i").on("click", function () {
-    var currentPlayer = $(".radio-play-btn").find(".music")[0];
-
-    if (currentPlayer.paused == false) {
-      currentPlayer.pause();
-      $(".radio-play-btn i").addClass("fa-play");
-      $(".radio-play-btn").find(".fa-play.fa-pause").removeClass("fa-pause");
-
+    if (stations.length > 0) {
+      currentIndex = 0;
+      stationSelect.value = 0;
+      updateUIForStation();
     } else {
-      var sounds = document.getElementsByTagName('audio');
-      for (i = 0; i < sounds.length; i++) sounds[i].pause();
-      $(".fa-pause").addClass("fa-play");
-      $(".fa-play.fa-pause").removeClass("fa-pause");
-
-      currentPlayer.play();
-      $(".radio-play-btn").find(".fa-play").addClass("fa-pause");
-      $(".radio-play-btn").find(".fa-play.fa-pause").removeClass("fa-play");
-    }
-
-    // Remove Play Button On Audio End
-    currentPlayer.onended = function () {
-      $(".fa-pause").addClass("fa-play");
-      $(".fa-play.fa-pause").removeClass("fa-pause");
-    };
-  });
-
-  // Audio Auto Play
-  function autoPlay() {
-    var currentPlayer = $(".radio-play-btn").find(".music")[0];
-    if ($(".radio-play-btn i").hasClass("fa-pause")) {
-      currentPlayer.play();
+      currentIndex = -1;
+      updateUIForNoStation();
     }
   }
 
-  // Reset play button class
-  function playReset() {
-    $(".radio-play-btn i").addClass("fa-play");
-    $(".radio-play-btn").find(".fa-play.fa-pause").removeClass("fa-pause");
+  function updateUIForNoStation() {
+    stationName.textContent = "Aucune station configurée";
+    stationMeta.textContent = "Ajoute une station en bas du poste.";
+    freqMain.textContent = "00.0";
+    const logoEl = document.getElementById("stationLogo");
+    logoEl.style.backgroundImage = "none";
+    logoEl.style.opacity = "0";
+    statusLed.style.background = "#555";
+    statusLed.style.boxShadow = "none";
+    playPauseBtn.textContent = "▶️ Lecture";
+    isPlaying = false;
+    stopVisualizer();
   }
 
-
-  // Previous button
-  $('.radio-nav-previous').click(function () {
-    prevSlide();
-    audioSource();
-    //playReset();
-    slideText();
-    //slideContentHeight();
-    moveLeft();
-    autoPlay();
-  });
-
-
-  // Next button
-  $('.radio-nav-next').click(function () {
-    nextSlide();
-    audioSource();
-    //playReset();
-    slideText();
-    //slideContentHeight();
-    moveRight();
-    autoPlay();
-  });
-// Auto Cycle Through Slides
-  var timer;
-
-  $('.radio-slider').mouseenter(function () {
-    if (timer) {clearInterval(timer);}
-  });
-  $('.radio-slider').mouseleave(function () {
-    timer = setInterval(function () {
-      if ($(".radio-play-btn i").hasClass("fa-play")) {
-        nextSlide();
-        audioSource();
-        slideText();
-        moveRight();
-        autoPlay();
-      }}, 10000);
-  });
-
-});
-  </script>
-</body>
-</html>
-  
-      <script id="rendered-js" type="module">
-// Load module from Skypack CDN
-import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
-
-
-
-// Create an AudioContext
-const audioContext = new AudioContext();
-
-// Get the audio element
-const audioElements = document.getElementsByTagName('audio');
-
-
-
-const audioMotion11 = new AudioMotionAnalyzer(
-document.getElementById("visualizer"),
-{
-  source: audioElements[0],
-  height: 200,
-  width: 400,
-  ansiBands: false,
-  showScaleX: false,
-  bgAlpha: 0,
-  overlay: true,
-  mode: 6,
-  frequencyScale: "log",
-  showPeaks: false,
-  smoothing: 0.7,
-  gradient: "classic",
-  ledBars: true,
-  showPeaks: true,
-  mirror: 1 });
-
-
-//# sourceURL=pen.js
-    </script>
-
-  <script>
-  (function() {
-    const BASE_WIDTH = 1209;
-    const BASE_HEIGHT = 765;
-
-    function resizeRadio() {
-      const radioBody = document.querySelector('.radio-body');
-      const slider = document.querySelector('.radio-slider');
-      if (!radioBody || !slider) return;
-
-      // Dimensions disponibles dans l’iframe
-      const availableWidth = window.innerWidth || slider.clientWidth;
-      const availableHeight = window.innerHeight || slider.clientHeight;
-
-      // On veut que toute la radio rentre => on prend le plus petit ratio
-      const scale = Math.min(
-        availableWidth / BASE_WIDTH,
-        availableHeight / BASE_HEIGHT
-      );
-
-      radioBody.style.transform = 'scale(' + scale + ')';
-      radioBody.style.transformOrigin = 'top left';
-
-      // On ajuste la hauteur du conteneur pour ne pas avoir de scroll bizarre
-      slider.style.height = '100vh';
+  function updateUIForStation() {
+    if (currentIndex < 0 || currentIndex >= stations.length) {
+      updateUIForNoStation();
+      return;
     }
 
-    window.addEventListener('load', resizeRadio);
-    window.addEventListener('resize', resizeRadio);
-  })();
+    const st = stations[currentIndex];
+    stationName.textContent = st.name;
+    stationMeta.textContent =
+      `${st.freq.toFixed(1)} MHz · ${st.city} · ${st.desc || ""}`;
+    freqMain.textContent = st.freq.toFixed(1);
+
+    const logoEl = document.getElementById("stationLogo");
+    if (st.logo) {
+      logoEl.style.backgroundImage = `url(${st.logo})`;
+      logoEl.style.opacity = "0.9";
+    } else {
+      logoEl.style.backgroundImage = "none";
+      logoEl.style.opacity = "0";
+    }
+  }
+
+  function setStatusPlaying(playing) {
+    isPlaying = playing;
+    if (playing) {
+      statusLed.style.background = "#4caf50";
+      statusLed.style.boxShadow = "0 0 12px rgba(76,175,80,0.95)";
+      playPauseBtn.textContent = "⏸ Pause";
+    } else {
+      statusLed.style.background = "#ff5252";
+      statusLed.style.boxShadow = "0 0 12px rgba(255,82,82,0.95)";
+      playPauseBtn.textContent = "▶️ Lecture";
+    }
+  }
+
+  function loadCurrentStation(autoPlay = true) {
+    if (currentIndex < 0 || currentIndex >= stations.length) return;
+    const st = stations[currentIndex];
+    audio.src = st.url;
+    updateUIForStation();
+    if (autoPlay) {
+      audio.play().then(() => {
+        setStatusPlaying(true);
+        startVisualizer();
+      }).catch((err) => {
+        console.warn("Lecture impossible :", err);
+        setStatusPlaying(false);
+        stopVisualizer();
+      });
+    }
+  }
+
+  function initVisualizer() {
+    if (!ctx || !canvas) return;
+    if (audioCtx && analyser && sourceNode) return;
+
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (!sourceNode) {
+        sourceNode = audioCtx.createMediaElementSource(audio);
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+        sourceNode.connect(analyser);
+        analyser.connect(audioCtx.destination);
+      }
+    } catch (e) {
+      console.warn("Visualizer désactivé (Web Audio non disponible ou déjà attaché) :", e);
+      audioCtx = null;
+      analyser = null;
+      dataArray = null;
+      sourceNode = null;
+    }
+  }
+
+  function resizeCanvas() {
+    if (!canvas || !ctx) return;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function drawVisualizer() {
+    if (!analyser || !ctx || !canvas) return;
+
+    resizeCanvas();
+    analyser.getByteFrequencyData(dataArray);
+
+    const width = canvas.width / (window.devicePixelRatio || 1);
+    const height = canvas.height / (window.devicePixelRatio || 1);
+
+    ctx.clearRect(0, 0, width, height);
+
+    const barCount = 40;
+    const step = Math.floor(dataArray.length / barCount);
+    const barWidth = width / barCount;
+
+    for (let i = 0; i < barCount; i++) {
+      const value = dataArray[i * step] || 0;
+      const barHeight = (value / 255) * height * 0.8;
+      const x = i * barWidth;
+      const y = height - barHeight;
+
+      const grad = ctx.createLinearGradient(x, y, x, height);
+      grad.addColorStop(0, "#ffeb3b");
+      grad.addColorStop(0.4, "#ff9800");
+      grad.addColorStop(1, "#ff5722");
+
+      ctx.fillStyle = grad;
+      ctx.fillRect(x + barWidth * 0.15, y, barWidth * 0.17, barHeight);
+    }
+
+    animationId = requestAnimationFrame(drawVisualizer);
+  }
+
+  function startVisualizer() {
+    if (!canvas || !ctx) return;
+    initVisualizer();
+    if (audioCtx && audioCtx.state === "suspended") {
+      audioCtx.resume().catch(() => {});
+    }
+    if (analyser && !animationId) {
+      animationId = requestAnimationFrame(drawVisualizer);
+    }
+  }
+
+  function stopVisualizer() {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+    if (ctx && canvas) {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+    }
+  }
+
+  function goToPrevStation() {
+    if (stations.length === 0) return;
+    currentIndex = (currentIndex - 1 + stations.length) % stations.length;
+    stationSelect.value = currentIndex;
+    loadCurrentStation(isPlaying);
+  }
+
+  function goToNextStation() {
+    if (stations.length === 0) return;
+    currentIndex = (currentIndex + 1) % stations.length;
+    stationSelect.value = currentIndex;
+    loadCurrentStation(isPlaying);
+  }
+
+  stationSelect.addEventListener("change", () => {
+    const idx = parseInt(stationSelect.value, 10);
+    if (!isNaN(idx)) {
+      currentIndex = idx;
+      loadCurrentStation(isPlaying);
+    }
+  });
+
+  playPauseBtn.addEventListener("click", () => {
+    if (!audio.src) {
+      loadCurrentStation(true);
+      return;
+    }
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().then(() => {
+        setStatusPlaying(true);
+        startVisualizer();
+      }).catch((err) => {
+        console.warn("Erreur lecture :", err);
+      });
+    }
+  });
+
+  stopBtn.addEventListener("click", () => {
+    if (!audio.src) return;
+    audio.pause();
+    audio.currentTime = 0;
+    setStatusPlaying(false);
+    stopVisualizer();
+  });
+
+  prevBtn.addEventListener("click", goToPrevStation);
+  nextBtn.addEventListener("click", goToNextStation);
+
+  audio.addEventListener("playing", () => {
+    setStatusPlaying(true);
+    startVisualizer();
+  });
+  audio.addEventListener("pause", () => {
+    setStatusPlaying(false);
+    stopVisualizer();
+  });
+  audio.addEventListener("ended", () => {
+    setStatusPlaying(false);
+    stopVisualizer();
+  });
+
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = parseFloat(volumeSlider.value);
+  });
+
+  addForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = newName.value.trim();
+    const freq = parseFloat(newFreq.value.replace(",", "."));
+    const url = newUrl.value.trim();
+
+    if (!name || isNaN(freq) || !url) {
+      alert("Merci de remplir tous les champs avec des valeurs valides.");
+      return;
+    }
+
+    stations.push({
+      name,
+      freq,
+      url,
+      city: "Custom",
+      desc: "Ajout manuel"
+      // logo: "mon-logo.png" // optionnel
+    });
+
+    newName.value = "";
+    newFreq.value = "";
+    newUrl.value = "";
+
+    refreshStationOptions();
+    currentIndex = stations.findIndex(
+      (s) => s.name === name && s.freq === freq && s.url === url
+    );
+    stationSelect.value = currentIndex;
+    loadCurrentStation(true);
+  });
+
+  // Init
+  refreshStationOptions();
 </script>
-
-  
-  
-  </body>
+</body>
 </html>
