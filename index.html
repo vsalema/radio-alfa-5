@@ -558,7 +558,11 @@
 
   function refreshStationOptions() {
     stationSelect.innerHTML = "";
-    stations.sort((a, b) => a.freq - b.freq);
+    stations.sort((a, b) => {
+  if (a.name === "Radio Alfa") return -1;   // Alfa toujours en 1er
+  if (b.name === "Radio Alfa") return 1;
+  return a.freq - b.freq;                   // les autres restent triées par fréquence
+});
     stations.forEach((st, index) => {
       const opt = document.createElement("option");
       opt.value = index;
