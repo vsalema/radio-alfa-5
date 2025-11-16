@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+<meta charset='UTF-8'>
+  <title>CodePen Demo</title>
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/a768aaf192.js"></script>
+<link rel="stylesheet" href="ma-radio-fit.css">
+<script src="ma-radio-fit.js" defer></script>
+	<style>
+		p { text-align:center; }
+		@media screen and (max-width: 768px) {
+			#logo { display:none; }
+		}
+	</style> 
+	
+	<style>
+   @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  margin: 0;
+  color: #3a5fb9;
+}
+
+/* ------------------------------ 
+	Radio Slider
+------------------------------ */
+/* Radio General Syles */
+.radio-slider {
+	background: rgb(93, 188, 218);
+	background: -moz-linear-gradient(top, rgba(93, 188, 218, 1) 0%, rgba(72, 140, 169, 1) 100%);
+	background: -webkit-linear-gradient(top, rgba(93, 188, 218, 1) 0%, rgba(72, 140, 169, 1) 100%);
+	background: linear-gradient(to bottom, rgba(93, 188, 218, 1) 0%, rgba(72, 140, 169, 1) 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#5dbcda', endColorstr='#488ca9', GradientType=0);
+	background-repeat: no-repeat;
+	padding: 80px 20px 20px 20px;
+}
+.radio-slider .learn-more {
+    background: none;
+    color: #b52103;
+    display: block;
+    font-weight: 700;
+    padding: 0;
+    text-transform: uppercase;
+}
+/* Radio Container */
+.radio-body {
+	background: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_522af612c8291e78.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	display: block;
+	margin: 0 auto;
+	max-width: 1209px;
+	height: 760px;
+	padding-top: 107px;
+    margin-top: -60px;
+}
+/* Screen */
+.radio-screen {
+	margin: 0 auto;
+	max-width: 60%;
+}
+.radio-slide-logo {
+	-webkit-align-items: center;
+	align-items: center;
+	background: rgb(255, 255, 255);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 29%, rgba(165, 165, 165, 1) 100%);
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 29%, rgba(165, 165, 165, 1) 100%);
+	background: radial-gradient(ellipse at center, rgb(255, 255, 255) 29%, rgb(36, 35, 35) 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#a5a5a5', GradientType=1);
+	border: 2px solid #adadad;
+  border-radius: 44% 44% 0 0;
+	background-image: radial-gradient(rgba(250, 244, 244, 0.05), rgba(12, 12, 12, 0.5)), url("https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_51c96f7945128b7f.gif");
+  background-size: 460px 180px;
+  
+  
+  
+  box-shadow: inset 22px 22px 30px -20px rgba(0, 0, 0, 0.8);
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	height: 230px;
+	/*-webkit-justify-content: center;
+	justify-content: center;*/
+	margin: 0 auto;
+	max-width: 475px;
+	padding: 20px 30px;
+	-webkit-clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
+	clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
+  border-image: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_48d677e821f2ccb2.png') 0% stretch;      
+}
+/*.radio-slide-logo *::before, .radio-slide-logo *::after {
+    -webkit-box-sizing: unset;
+    -moz-box-sizing: unset;
+    box-sizing: unset;
+}*/
+.clip-svg {
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.clip {
+    -webkit-clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
+    clip-path: polygon(50% 0%, 100% 0, 100% 78%, 50% 100%, 0% 78%, 0 0);
+    /*-webkit-clip-path: url("#clipping");*/
+    clip-path: url("#clipping");
+}
+.slide-wrap {
+	overflow: hidden;
+    /*position: absolute;*/
+	position: relative;
+}
+.radio-slide-logo ul {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.radio-slide-logo li {
+	position: relative;
+    /*position: absolute;*/
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0 40px;
+	text-align: center;
+	width: 480px;
+}
+.radio-slide-logo li img {
+    max-width: 360px;
+    max-height: 140px;
+}
+
+.play-wrap {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: center;
+	justify-content: center;
+	margin-top: -90px;
+	position: relative;
+	text-align: center;
+}
+.play-container {
+	position: relative;
+    width: 100%;
+}
+.play-container img {
+  max-width: 100%;
+}
+.radio-play-btn {
+	color: #b52103;
+	left: 0;
+	margin-top: 65px;
+	position: absolute;
+	font-size: 50px;
+	width: 100%;
+}
+.radio-play-btn i {
+	cursor: pointer;
+}
+.fa, .fa::before, .fa::after {
+    -webkit-box-sizing: unset;
+    -moz-box-sizing: unset;
+    box-sizing: unset;
+}
+.radio-play-btn .fa-play {
+	margin-left: 7px;
+}
+/* Tuner */
+.radio-tuner {
+	background: #fff;
+	border: 3px solid #651100;
+	border-radius: 8px;
+	box-shadow: inset 18px 18px 30px -20px rgb(239, 144, 18);
+	margin: 25px auto 0 auto;
+	max-width: 80%;
+	position: relative;
+}
+.tuner-dial {
+	background: #ff0000;
+	box-shadow: 0px 0px 7px red;
+	height: 62px;
+	position: absolute;
+	width: 2px;
+	left: 6.5%;
+	transition: all .4s ease-in-out;
+	z-index: 1;
+}
+.radio-clients {
+	align-items: center;
+	border-bottom: 2px dotted #000;
+	border-top: 2px dotted #000;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	list-style: none outside none;
+	margin: 10px 20px;
+	padding: 0;
+}
+.radio-clients li {
+	padding: 5px 10px;
+}
+.radio-clients li img {
+	vertical-align: bottom;
+	-webkit-filter: contrast(0);
+	filter: brightness(0);
+	transition: filter .6s ease-in-out;
+    width: 100%;
+}
+.radio-clients li.active img {
+	-webkit-filter: contrast(1);
+	filter: brightness(1);
+}
+/* Nav Buttons & Slide Content */
+/* Wrap */
+.radio-display {
+	-webkit-align-items: center;
+	align-items: center;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	margin: 15px auto 0 auto;
+	max-width: 75%;
+}
+/* Nav */
+.radio-nav {
+	cursor: pointer;
+	max-width: 110px;
+}
+.radio-nav img {
+    width: 100%;
+}
+/* Slide Content */
+.radio-slide-content {
+	background: #fff;
+	border: 3px solid #adadad;
+	border-radius: 8px;
+	box-shadow: inset 18px 18px 30px -20px rgba(0, 0, 0, 0.8);
+	padding: 10px 20px;
+	text-align: center;
+	width: 65%;
+	height: 130px;
+	transition: height .2s ease-in-out;
+    background-image: url("https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_86fb12fc284e0222.png");
+    background-position-y: -0px;
+    background-position-x: 0px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.radio-slide-title {
+	font-size: 18px;
+	margin-bottom: 0;
+	margin-top: 0;
+color: red;
+  }
+.radio-slide-content p {
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+
+/* ------------------------------ 
+	1199px
+------------------------------ */
+@media screen and (max-width: 1199px) {
+
+	/* Radio Slider */
+	.radio-body {
+	    max-width: 720px;
+	    padding-top: 60px;
+	    height: 450px;
+	    margin-top: -40px;
+	}
+	.radio-screen {
+	    max-width: 450px;
+	}
+	.radio-slide-logo {
+	    height: 140px;
+	    max-width: 300px;
+	}
+	.radio-slide-logo li {
+	    width: 300px;
+	}
+	.radio-slide-logo li img {
+	    max-width: 207px;
+	    max-height: 80px;
+	}
+	.play-wrap {
+	    margin-top: -55px;
+	}
+	.radio-play-btn {
+	    margin-top: 40px;
+	    font-size: 30px;
+	}
+	.radio-tuner {
+	    margin: 15px auto 0 auto;
+	}
+	.radio-clients {
+	    margin: 5px 10px;
+	}
+	.radio-clients li {
+	    max-width: 90px;
+	    display: flex;
+	    align-items: center;
+	}
+	.tuner-dial {
+	    height: 51px;
+	}
+	.radio-display {
+	    margin: 7px auto 0 auto;
+	}
+	.radio-nav {
+	    max-width: 70px;
+	}
+	.radio-slide-content {
+	    height: 75px;
+	}
+	.radio-slide-title {
+	    font-size: 22px;
+	    margin-bottom: 5px;
+	}
+	.active-content p {
+	    display: none;
+	}
+
+}
+
+/* ------------------------------ 
+	768px
+------------------------------ */
+@media screen and (max-width: 768px) {
+	/* Radio Slider */
+	.radio-body {
+		background: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_8c4faaeab1cba4a1.png');
+		background-repeat: no-repeat;
+		background-size: 100%;
+	    max-width: 450px;
+	    padding-top: 60px;
+	    height: 510px;
+	    margin-top: 0;
+	}
+	.radio-screen {
+	    max-width: 400px;
+	}
+	.radio-slide-logo {
+	    height: 135px;
+	    max-width: 280px;
+	}
+	.radio-slide-logo li {
+	    width: 280px;
+	}
+	.radio-slide-logo li img {
+		max-width: 191px;
+	}
+	.play-wrap {
+	    margin-top: -48px;
+	}
+	.radio-play-btn {
+	    margin-top: 34px;
+	}
+	.radio-clients li {
+	    max-width: 50px;
+	}
+	.tuner-dial {
+		height: 43px;
+	}
+	.radio-display {
+		max-width: 80%;
+		-webkit-justify-content: center;
+		justify-content: center;
+	}
+	.radio-slide-content {
+	    order: -1;
+	    width: 100%;
+	    margin: 5px 0;
+	}
+	.radio-nav {
+	    margin: 5px 20px;
+	    max-width: 65px;
+	}
+
+}
+
+
+
+
+/* ------------------------------ 
+	640px
+------------------------------ */
+@media screen and (max-width: 640px) {
+	/* Audio Player */
+	.player-wrap {
+    	max-width: 215px;
+    }
+    .play-img-wrap {
+    	margin-right: 0;
+    	border-top-right-radius: 5px;
+    }
+    .play-img-wrap img {
+	    border-top-right-radius: 5px;
+	}
+    .player-description {
+	    width: auto;
+	    padding: 0 10px 10px;
+	}
+
+}
+/* ------------------------------ 
+	479px RADIO SLIDER ONLY!!!
+------------------------------ */
+@media screen and (max-width: 479px) {
+	.radio-slider {
+		padding: 120px 0 20px 0;
+	}
+	.radio-body {
+	   
+	    background-size: 100% 100%;
+	    max-width: 100%;
+	}
+	.radio-tuner {
+		max-width: 95%;
+	}
+	.radio-display {
+	    max-width: 95%;
+	}
+
+}
+/* ------------------------------ 
+	380px RADIO SLIDER ONLY!!!
+------------------------------ */
+@media screen and (max-width: 380px) {
+	.radio-body {
+		padding-top: 65px;
+	}
+	.radio-slide-logo {
+	    max-width: 220px;
+	}
+	.radio-slide-logo li {
+	    width: 220px;
+	}
+	.radio-slide-logo li img {
+	    max-width: 140px;
+	}
+	.play-wrap {
+		align-items: center;
+	}
+	.radio-play-btn {
+	    font-size: 26px;
+	    margin-top: 0;
+	    top: 30px;
+	}
+
+}
+/* ------------------------------ 
+	340px
+------------------------------ */
+@media screen and (max-width: 340px) {
+	.radio-play-btn {
+	    top: 25px;
+	}
+
+}
+.visualizer {
+  padding: 1.3rem;
+  border-radius: 1.5rem;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0.8;
+  z-index: -1;
+  height: 228px;
+  width: 496px;
+  margin-left: -50px;
+  margin-top: 128px;
+  display: flex;
+  max-width: 59%;
+  text-align: center;
+  margin-right: -67px;
+}
+  @import url( 
+'https://fonts.googleapis.com/css2?family=Poppins&display=swap'); 
+  video {
+  border-radius: 45% 45% 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 171px;
+  position: absolute;
+  width: 409px;
+  top: 133px;
+  max-width: 647px;
+  left: 366px;
+  margin-left: 53px;
+  z-index: 2;
+visibility: hidden;
+  }
+
+  canvas {
+  border-radius: 41% 41% 0 0;
+  overflow: hidden;
+  display: flex;
+  position: absolute;
+  width: 454px;
+  max-width: 452px;
+  max-block-size: 464px;
+  top: 5px;
+  left: 30px;
+}
+  
+ .playy {
+  position: relative;
+  height: 230px;
+  margin: 0 auto;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 472px;
+  padding: 20px 30px;
+  width: 2687px;
+  margin-left: -73px;
+  margin-right: -408px;
+  margin-top: -40px;
+}
+.im { 
+border-image: url('https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_e7b19bf0b5926183.gif') 0% stretch;
+  display: block;
+  box-sizing: border-box;
+  margin: 0px -20px;
+  max-width: 20px;
+  width: 100%;
+  position: absolute;
+  min-height: auto;
+    }
+
+  /* --- Overrides responsives pour tuner + contenu --- */
+
+/* On annule le width:100% que je t'avais fait ajouter */
+.radio-tuner {
+  width: auto;
+  max-width: 80%;   /* comme dans ton CSS d'origine */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.radio-display {
+  width: auto;
+  max-width: 75%;   /* comme dans ton CSS d'origine */
+  margin-left: auto;
+  margin-right: auto;
+}
+.radio-body {
+  position: relative;
+  overflow: hidden;  /* coupe tout ce qui dépasse de l'image de fond */
+}
+
+ /* Le bloc texte adapte sa hauteur au contenu, mais garde la largeur prévue */
+.radio-slide-content {
+  height: auto;   /* au lieu de 130px */
+}
+
+/* On s'assure aussi de ça dans les media queries */
+@media screen and (max-width: 1199px) {
+  .radio-slide-content {
+    height: auto; /* override du 75px */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .radio-slide-content {
+    height: auto;
+  }
+}
+ /* --- Ajustements position mobile pour le tuner + display --- */
+
+/* Tablette / petit écran */
+@media screen and (max-width: 768px) {
+  .radio-tuner {
+    margin-top: 30px;   /* descend le bloc tuner */
+  }
+
+  .radio-display {
+    margin-top: 25px;   /* descend le bloc avec le texte + flèches */
+  }
+}
+
+/* Téléphones (portrait) */
+@media screen and (max-width: 479px) {
+  .radio-tuner {
+    margin-top: 45px;   /* encore un peu plus bas sur très petit écran */
+  }
+
+  .radio-display {
+    margin-top: 35px;
+  }
+}
+
+/* Très petits écrans */
+@media screen and (max-width: 380px) {
+  .radio-tuner {
+    margin-top: 55px;
+  }
+
+  .radio-display {
+    margin-top: 40px;
+  }
+}
+/* Ajustements précis pour la version mobile */
+@media screen and (max-width: 480px) {
+
+  .radio-tuner {
+    margin-top: 52px !important;
+  }
+
+  .radio-display {
+    margin-top: 0px !important;
+  }
+}
+/* Ajustement précis des flèches de navigation pour mobile */
+@media screen and (max-width: 480px) {
+
+  .radio-nav-previous,
+  .radio-nav-next {
+    margin-top: -4px !important;
+  }
+
+}
+/* Centrer le visualizer dans .radio-screen en mobile */
+@media screen and (max-width: 480px) {
+
+  .radio-screen {
+    position: relative;
+  }
+
+  /* Ciblage par ID pour être plus fort que le JS */
+  #visualizer {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    top: 40px !important;      /* ajuste cette valeur pour monter/descendre */
+    margin: 0 !important;
+    width: 90% !important;     /* le JS peut changer width, mais 90% + !important gagne */
+    max-width: 400px !important;
+    z-index: 2 !important;     /* pour qu’il soit visible, pas derrière le reste */
+  }
+
+  /* On recentre aussi le canvas à l'intérieur */
+  #visualizer canvas {
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+} 
+  
+  
+  
+  
+  
+  </style>
+</head>
+<body>
+  <body class="home">
+  
+    
+    
+    <div class="radio-slider">
+  
+      
+      
+      <div class="radio-body">
+    
+        
+        
+        <div class="radio-screen">
+      
+      <div class="radio-slide-logo clip">
+       
+        
+        <div class="container">
+          
+          
+        </div> 
+         
+        
+   <div class="canv visualizer" id="visualizer"></div>
+        
+        <div class="slide-wrap">
+          
+          <ul>
+<li class="slide-one active" data-audio-src="https://n16a-eu.rcs.revma.com/amrbkhqtkm0uv?rj-ttl=5&rj-tok=AAABjyZZV10A8pNBeIWHkkzM-w" data-title="Radio Alfa" data-description="A Rádio Alfa é uma estação de rádio parisiense, dirigida à comunidade lusófona de França. Foi lançada a 5 de outubro de 1987 pela Associação Luso-Francesa do Audiovisual. A sede e os estúdios localizam-se em Créteil, no sudeste de Paris."
+              data-link="#1">
+              <img src="https://radioalfa.net/wp-content/uploads/2023/02/logo-radio-alfa-DAB-avril-2021-294x300.png" />
+            </li>
+
+            <li class="slide-two" data-audio-src="https://stream-icy.bauermedia.pt/comercial.mp3" data-title="Radio Comercial" data-description="A Rádio Comercial é uma rádio nacional portuguesa (com cobertura em Portugal Continental) do grupo Bauer Media Audio Portugal. Passa música pop, dance e rock actual e dos últimos dez anos. Actualmente, o seu director de..  "
+              data-link="#2">
+              <img src="https://www.zupimages.net/up/24/18/ywnd.png" />
+            </li>
+
+            <li class="slide-three" data-audio-src="	
+https://23543.live.streamtheworld.com/RADIO_RENASCENCA.mp3" data-title="Radio Renascenca" data-description="Vitae pulvinar metus nisl quis ex. Donec tempor quam non ligula sodales, vel porttitor mauris bibendum. Donec eget velit a diam congue commodo."
+              data-link="#3">
+              <img src="https://especiais.rr.pt/sondagens/img/rr/renascenca.png" />
+            </li>
+
+            <li class="slide-four" data-audio-src="https://stream-icy.bauermedia.pt/m80.aac" data-title="M80" data-description="Pellentesque maximus mi eget arcu cursus, sit amet viverra arcu luctus."
+              data-link="#4">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/M80_Portugal.svg" />
+            </li>
+
+            <li class="slide-five" data-audio-src="https://stream-icy.bauermedia.pt/cidade.aac" data-title="Cidade FM" data-description="Cidade FM, anteriormente chamada Rádio Cidade, é uma rádio portuguesa que emite essencialmente música dos tops nacionais e internacionais nos géneros pop, hip hop, R&B, reggaeton."
+              data-link="#5">
+              <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_0f316d41dec0afce.png" />
+            </li>
+
+            <li class="slide-six" data-audio-src="https://radiocast.rtp.pt/antena180a.mp3" data-title="Antena 1" data-description="A Antena 1 é uma emissora de radiodifusão do Grupo RTP – Rádio e Televisão de Portugal. A sua programação é baseada em conteúdos generalistas e programas de autor, com forte incisão em desporto e música."
+              data-link="#6">
+              <img src="https://upload.wikimedia.org/wikipedia/fr/7/7c/Antena_1_%28Portugal%29_logo.png" />
+            </li>
+          </ul>
+
+        </div>
+      
+      </div>
+
+      <div class="play-wrap">
+        <div class="play-container">
+          
+          
+          
+          
+          <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_66c19d60443ec52b.png" />
+        </div>
+        
+        
+        
+        <div class="radio-play-btn">
+          
+<audio class="music" hidden controls crossorigin="anonymous" loop src="https://n16a-eu.rcs.revma.com/amrbkhqtkm0uv?rj-ttl=5&rj-tok=AAABjyZZV10A8pNBeIWHkkzM-w" id="audio"></audio>
+          <i class="fa fa-play" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="radio-tuner">
+      <div class="tuner-dial"></div>
+      <ul class="radio-clients">
+        <li class="active">
+          <img src="https://www.zupimages.net/up/24/18/k36t.png" alt="radio alfa" />
+        </li>
+        <li>
+          <img src="https://www.zupimages.net/up/24/18/d41l.png" alt="Radio Comercial" />
+        </li>
+        <li>
+          <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_7de54f4d87731611.png" alt="Renascenca" />
+        </li>
+        <li>
+          <img src="https://www.zupimages.net/up/24/18/6gby.png" alt="Chocolate Pen" />
+        </li>
+        <li>
+          <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_e4fac4b44eec8600.png" alt="cidade fm"/>
+        </li>
+        <li>
+          <img src="https://www.zupimages.net/up/24/18/sbsr.png" alt="Antena 1" />
+        </li>
+      </ul>
+    </div>
+
+    <div class="radio-display">
+      <div class="radio-nav radio-nav-previous">
+        <i class="im">.</i>
+        <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_03e68d48949bfbe0.png" class="img-fluid" />
+      </div>
+      
+      
+      
+      
+      
+      
+      <div class="radio-slide-content">
+        <div class="active-content">
+          <h3 class="radio-slide-title">Slide Title</h3>
+          <p>Slide description text.</p>
+         
+        </div>
+      </div>
+      
+      
+      <div class="radio-nav radio-nav-next">
+        <img src="https://raw.githubusercontent.com/imagesloads/images/refs/heads/main/img_b3eb8e6ac1f7d4b0.png" class="img-fluid" />
+      </div>
+    </div>
+
+  
+      
+      
+     
+      
+      
+      
+      
+      
+      </div>
+</div><!-- .radio-slider -->
+
+    
+    
+    <svg class="clip-svg" width="0" height="0">
+  <defs>
+    <clipPath id="clipping" clipPathUnits="objectBoundingBox">
+      <polygon points=".5 0, 1 0, 1 .78, .5 1, 0 .78, 0 0" />
+    </clipPath>
+  </defs>
+</svg>
+<script>
+  jQuery(document).ready(function ($) {
+
+  // Detect If Browser is IE
+  function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+      // IE 10 or older => return version number
+      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+      // IE 11 => return version number
+      var rv = ua.indexOf('rv:');
+      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+      // Edge (IE 12+) => return version number
+      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
+  }
+
+  var version = detectIE();
+
+
+  // Slider Functionality
+  var slideCount = $('.radio-slide-logo ul li').length;
+  if (version > 0) {
+    var slideWidth = $('.radio-slide-logo ul li img').width() + 80;
+  } else {
+    var slideWidth = $('.radio-slide-logo ul li').width() + 80;
+  }
+  var slideHeight = $('.radio-slide-logo').height();
+  var sliderUlWidth = slideCount * slideWidth;
+
+  $('.radio-slide-logo .slide-wrap').css({ width: slideWidth - 80, height: slideHeight });
+
+  $('.radio-slide-logo ul').css({ width: sliderUlWidth, marginLeft: -slideWidth - 40, height: slideHeight });
+
+  $('.radio-slide-logo ul li:last-child').prependTo('.radio-slide-logo ul');
+
+
+  // Add active class for previous slide
+  function prevSlide() {
+    // Main Slide
+    var active = $('.radio-slide-logo ul li.active').removeClass('active');
+    if (active.prev() && active.prev().length) {
+      active.prev().addClass('active');
+    } else {
+      active.siblings(":first").addClass('active');
+    }
+
+    // Tuner Icon
+    var activeTuner = $('ul.radio-clients li.active').removeClass('active');
+    if (activeTuner.prev() && activeTuner.prev().length) {
+      activeTuner.prev().addClass('active');
+    } else {
+      activeTuner.siblings(":last").addClass('active');
+    }
+  };
+
+
+  // Add active class for next slide
+  function nextSlide() {
+    // Main Slide
+    var active = $('.radio-slide-logo ul li.active').removeClass('active');
+    if (active.next() && active.next().length) {
+      active.next().addClass('active');
+    } else {
+      active.siblings(":first").addClass('active');
+    }
+
+    // Tuner Icon
+    var activeTuner = $('ul.radio-clients li.active').removeClass('active');
+    if (activeTuner.next() && activeTuner.next().length) {
+      activeTuner.next().addClass('active');
+    } else {
+      activeTuner.siblings(":first").addClass('active');
+    }
+  };
+
+
+  // Move to previous slide
+  function moveLeft() {
+    $('.radio-slide-logo ul').animate({
+      left: +slideWidth },
+    400, function () {
+      $('.radio-slide-logo ul li:last-child').prependTo('.radio-slide-logo ul');
+      $('.radio-slide-logo ul').css('left', '');
+    });
+  };
+
+
+  // Move to next slide
+  function moveRight() {
+    $('.radio-slide-logo ul').animate({
+      left: -slideWidth },
+    400, function () {
+      $('.radio-slide-logo ul li:first-child').appendTo('.radio-slide-logo ul');
+      $('.radio-slide-logo ul').css('left', '');
+    });
+  };
+
+
+  // Swap audio source
+  function audioSource() {
+    var audioPlayer = $('.radio-play-btn .music');
+    var currentAudio = $('.radio-slide-logo li.active').data('audio-src');
+    audioPlayer.attr('src', currentAudio);
+  }
+
+
+  // Swap slide text
+  function slideText() {
+    var slideTitle = $('.radio-slide-logo li.active').data('title');
+    var slideDescription = $('.radio-slide-logo li.active').data('description');
+    var slideLink = $('.radio-slide-logo li.active').data('link');
+    var currentTitle = $('.radio-slide-content .radio-slide-title');
+    var currentDescription = $('.radio-slide-content p');
+    var currentLink = $('.radio-slide-content a');
+
+    currentTitle.text(slideTitle);
+    currentDescription.text(slideDescription);
+    currentLink.attr('href', slideLink);
+  }
+
+  slideText();
+
+
+  // Adjust slide content height
+  function slideContentHeight() {
+    var contentHeight = $('.active-content').height();
+    $('.radio-slide-content').css('height', contentHeight + 25);
+  }
+
+  //slideContentHeight();
+
+
+  // Reposition turner depending on active slide
+  if ($('body').hasClass('home')) {
+    function tunerDial() {
+      var tunerOffset = $('.radio-clients li.active').offset();
+      var tunerLeft = tunerOffset.left;
+      var tunerWidth = $('.radio-clients li.active').width();
+      var containerOffset = $('.radio-tuner').offset();
+      var containerLeft = containerOffset.left;
+      var tunerMath = tunerWidth / 2 + tunerLeft - containerLeft + 10;
+      var tunerPosition = Math.round(tunerMath);
+      $('.tuner-dial').css('left', tunerPosition + 'px');
+    };
+
+    // Update tuner position
+    $(function () {
+      setInterval(function () {
+        tunerDial();
+      }, 0);
+    });
+  }
+
+
+  // Responsive Slider Width
+  $(window).resize(function () {
+    var slideCount = $('.radio-slide-logo ul li').length;
+    var slideWidth = $('.radio-slide-logo ul li').width() + 80;
+    var slideHeight = $('.radio-slide-logo').height();
+    var sliderUlWidth = slideCount * slideWidth;
+
+    $('.radio-slide-logo .slide-wrap').css({ width: slideWidth - 80, height: slideHeight });
+
+    $('.radio-slide-logo ul').css({ width: sliderUlWidth, marginLeft: -slideWidth - 40, height: slideHeight });
+  });
+
+
+
+
+
+  // Home Page Audio Functionality
+  $(".radio-play-btn i").on("click", function () {
+    var currentPlayer = $(".radio-play-btn").find(".music")[0];
+
+    if (currentPlayer.paused == false) {
+      currentPlayer.pause();
+      $(".radio-play-btn i").addClass("fa-play");
+      $(".radio-play-btn").find(".fa-play.fa-pause").removeClass("fa-pause");
+
+    } else {
+      var sounds = document.getElementsByTagName('audio');
+      for (i = 0; i < sounds.length; i++) sounds[i].pause();
+      $(".fa-pause").addClass("fa-play");
+      $(".fa-play.fa-pause").removeClass("fa-pause");
+
+      currentPlayer.play();
+      $(".radio-play-btn").find(".fa-play").addClass("fa-pause");
+      $(".radio-play-btn").find(".fa-play.fa-pause").removeClass("fa-play");
+    }
+
+    // Remove Play Button On Audio End
+    currentPlayer.onended = function () {
+      $(".fa-pause").addClass("fa-play");
+      $(".fa-play.fa-pause").removeClass("fa-pause");
+    };
+  });
+
+  // Audio Auto Play
+  function autoPlay() {
+    var currentPlayer = $(".radio-play-btn").find(".music")[0];
+    if ($(".radio-play-btn i").hasClass("fa-pause")) {
+      currentPlayer.play();
+    }
+  }
+
+  // Reset play button class
+  function playReset() {
+    $(".radio-play-btn i").addClass("fa-play");
+    $(".radio-play-btn").find(".fa-play.fa-pause").removeClass("fa-pause");
+  }
+
+
+  // Previous button
+  $('.radio-nav-previous').click(function () {
+    prevSlide();
+    audioSource();
+    //playReset();
+    slideText();
+    //slideContentHeight();
+    moveLeft();
+    autoPlay();
+  });
+
+
+  // Next button
+  $('.radio-nav-next').click(function () {
+    nextSlide();
+    audioSource();
+    //playReset();
+    slideText();
+    //slideContentHeight();
+    moveRight();
+    autoPlay();
+  });
+// Auto Cycle Through Slides
+  var timer;
+
+  $('.radio-slider').mouseenter(function () {
+    if (timer) {clearInterval(timer);}
+  });
+  $('.radio-slider').mouseleave(function () {
+    timer = setInterval(function () {
+      if ($(".radio-play-btn i").hasClass("fa-play")) {
+        nextSlide();
+        audioSource();
+        slideText();
+        moveRight();
+        autoPlay();
+      }}, 10000);
+  });
+
+});
+  </script>
+</body>
+</html>
+  
+      <script id="rendered-js" type="module">
+// Load module from Skypack CDN
+import AudioMotionAnalyzer from "https://cdn.skypack.dev/audiomotion-analyzer?min";
+
+
+
+// Create an AudioContext
+const audioContext = new AudioContext();
+
+// Get the audio element
+const audioElements = document.getElementsByTagName('audio');
+
+
+
+const audioMotion11 = new AudioMotionAnalyzer(
+document.getElementById("visualizer"),
+{
+  source: audioElements[0],
+  height: 200,
+  width: 400,
+  ansiBands: false,
+  showScaleX: false,
+  bgAlpha: 0,
+  overlay: true,
+  mode: 6,
+  frequencyScale: "log",
+  showPeaks: false,
+  smoothing: 0.7,
+  gradient: "classic",
+  ledBars: true,
+  showPeaks: true,
+  mirror: 1 });
+
+
+//# sourceURL=pen.js
+    </script>
+
+  
+  
+  
+  </body>
+</html>
